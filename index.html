@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لعبة لوحة التحدي - النسخة الكبرى الموسعة</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #0f172a;
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 10px;
+        }
+
+        .game-container {
+            width: 100%;
+            max-width: 1250px;
+            height: 97vh;
+            background: #f8fafc;
+            color: #333;
+            border-radius: 16px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 15px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+        }
+
+        .game-header {
+            display: flex;
+            justify-content: space-between;
+            background: #1e293b;
+            padding: 12px 20px;
+            border-radius: 10px;
+            color: white;
+            align-items: center;
+        }
+
+        .game-header h1 {
+            font-size: 1.3rem;
+            letter-spacing: 0.5px;
+        }
+
+        .game-header button {
+            background: rgba(255,255,255,0.15);
+            border: none;
+            color: white;
+            padding: 7px 14px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: 0.2s;
+            font-size: 0.9rem;
+        }
+
+        .game-header button:hover {
+            background: rgba(255,255,255,0.3);
+        }
+
+        /* شبكة اللعبة المحدثة لتسع الفئات الكثيرة */
+        .board-grid {
+            display: grid;
+            grid-template-columns: repeat(8, 1fr);
+            gap: 6px;
+            flex-grow: 1;
+            margin: 10px 0;
+            overflow-y: auto;
+            padding: 5px;
+        }
+
+        .tile {
+            background: #ffffff;
+            border-radius: 7px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: #1e293b;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.06);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            min-height: 65px;
+            border: 2px solid transparent;
+            padding: 2px;
+        }
+
+        .tile span.cat-label {
+            font-size: 0.55rem;
+            color: #64748b;
+            margin-top: 3px;
+            text-align: center;
+            padding: 0 2px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 100%;
+        }
+
+        .tile:hover {
+            background: #e2e8f0;
+            border-color: #3b82f6;
+            transform: translateY(-2px);
+        }
+
+        .tile.disabled {
+            background: #e2e8f0;
+            color: #cbd5e1;
+            border-color: transparent;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .tile.disabled span.cat-label {
+            color: #cbd5e1;
+        }
+
+        /* شريط اللاعبين السفلي */
+        .players-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #fff;
+            padding: 10px 20px;
+            border-radius: 12px;
+            box-shadow: 0 -4px 15px rgba(0,0,0,0.05);
+        }
+
+        .player-box {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: #f1f5f9;
+            padding: 8px 18px;
+            border-radius: 30px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            border: 1px solid #e2e8f0;
+        }
+
+        .player-box.red-theme {
+            background: #ef4444;
+            color: white;
+            border-color: #dc2626;
+        }
+
+        .score-btn {
+            background: rgba(0,0,0,0.08);
+            border: none;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            font-size: 1.2rem;
+            cursor: pointer;
+            color: inherit;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.2s;
+        }
+
+        .score-btn:hover {
+            background: rgba(0,0,0,0.18);
+        }
+
+        .center-logo h2 {
+            color: #1e293b;
+            font-size: 1.3rem;
+        }
+
+        /* نافذة السؤال (Modal) */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.75);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            padding: 15px;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 25px 30px;
+            border-radius: 16px;
+            width: 100%;
+            max-width: 520px;
+            text-align: center;
+            color: #333;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            animation: modalPop 0.3s ease;
+        }
+
+        @keyframes modalPop {
+            0% { transform: scale(0.8); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .modal-content h3 {
+            color: #ef4444;
+            font-size: 1.05rem;
+            margin-bottom: 10px;
+        }
+
+        .modal-content p {
+            font-size: 1.25rem;
+            margin: 15px 0;
+            line-height: 1.6;
+            color: #1e293b;
+        }
+
+        #modalAnswerText {
+            background: #f8fafc;
+            padding: 12px;
+            border-radius: 8px;
+            border: 2px dashed #cbd5e1;
+            color: #16a34a;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 15px;
+            transition: 0.2s;
+            font-size: 1.1rem;
+        }
+
+        #modalAnswerText:hover {
+            background: #f1f5f9;
+        }
+
+        .modal-close-btn {
+            margin-top: 20px;
+            padding: 10px 25px;
+            background: #1e293b;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: 0.2s;
+        }
+
+        .modal-close-btn:hover {
+            background: #334155;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="game-container">
+        <!-- شريط العلوي -->
+        <header class="game-header">
+            <button onclick="location.reload()">إعادة اللعبة</button>
+            <h1>لوحة التحدي الموسعة (عواصم، شعارات، شخصيات والمزيد)</h1>
+            <button onclick="alert('اختر مربعاً، اطرح السؤال على اللاعبين، وعند الضغط تظهر الإجابة!')">طريقة اللعب</button>
+        </header>
+
+        <!-- شبكة الفئات والنقاط -->
+        <main class="board-grid" id="boardGrid">
+            <!-- يتم تعبئتها ديناميكياً عبر الجافاسكريبت -->
+        </main>
+
+        <!-- شريط النقاط السفلي -->
+        <footer class="players-footer">
+            <div class="player-box">
+                <button class="score-btn" onclick="adjustScore('player1', -200)">-</button>
+                <span id="score1">400</span>
+                <button class="score-btn" onclick="adjustScore('player1', 200)">+</button>
+                <span class="player-name">فرح</span>
+            </div>
+            <div class="center-logo">
+                <h2>🏆 التحدي الكبرى</h2>
+            </div>
+            <div class="player-box red-theme">
+                <button class="score-btn" onclick="adjustScore('player2', -200)">-</button>
+                <span id="score2">400</span>
+                <button class="score-btn" onclick="adjustScore('player2', 200)">+</button>
+                <span class="player-name">ياسمين</span>
+            </div>
+        </footer>
+    </div>
+
+    <!-- نافذة السؤال المنبثقة -->
+    <div id="questionModal" class="modal">
+        <div class="modal-content">
+            <h3 id="modalCategory">اسم الفئة</h3>
+            <p id="modalQuestionText">نص السؤال سيظهر هنا...</p>
+            <div id="modalAnswerText" onclick="revealAnswer()">[اضغط هنا لعرض الإجابة الصحيحة]</div>
+            <button class="modal-close-btn" onclick="closeModal()">إغلاق المربع وتسجيل النقاط</button>
+        </div>
+    </div>
+
+    <script>
+        // بنك الأسئلة الموسع الشامل لكل التصنيفات الجديدة والقديمة
+        const categoriesData = [
+            {
+                id: 1,
+                name: "عواصم العالم",
+                questions: [
+                    { points: 200, q: "ما هي عاصمة دولة سلطنة عمان؟", a: "مسقط" },
+                    { points: 200, q: "ما هي عاصمة دولة أستراليا الشهيرة؟", a: "كانبيرا" },
+                    { points: 400, q: "ما هي عاصمة كندا؟", a: "أوتاوا" },
+                    { points: 400, q: "ما هي عاصمة الأرجنتين في أمريكا الجنوبية؟", a: "بوينس آيرس" },
+                    { points: 600, q: "ما هي عاصمة دولة اليابان؟", a: "طوكيو" },
+                    { points: 600, q: "ما هي عاصمة دولة النمسا؟", a: "فيينا" }
+                ]
+            },
+            {
+                id: 2,
+                name: "شعارات",
+                questions: [
+                    { points: 200, q: "ما هو الشعار الشهير لشركة سيارات يتكون من 4 حلقات متداخلة؟", a: "أودي (Audi)" },
+                    { points: 200, q: "شركة تقنية عالمية شعارها تفاحة مقضومة، ما هي؟", a: "أبل (Apple)" },
+                    { points: 400, q: "ما هو شعار شركة سيارات رياضية يظهر فيه 'حصان جامح' أسود على خلفية صفراء؟", a: "فيراري (Ferrari)" },
+                    { points: 400, q: "شعاره حرف M ذهبي ضخم، وهو أشهر سلسلة مطاعم وجبات سريعة في العالم؟", a: "ماكدونالدز (McDonald's)" },
+                    { points: 600, q: "ما هو الشعار أو الرمز الذي يظهر على علم دولة لبنان؟", a: "شجرة الأرز الخضراء" },
+                    { points: 600, q: "ما هو الشعار البصري لشركة نايكي (Nike) الرياضية؟", a: "علامة الصعقة أو الصح المائل (Swoosh)" }
+                ]
+            },
+            {
+                id: 3,
+                name: "جماد وحيوان",
+                questions: [
+                    { points: 200, q: "جماد بحرف الميم يُستخدم للإضاءة ليلاً ويوجد في السقف؟", a: "مصباح" },
+                    { points: 200, q: "حيوان ثديي مائي يُعرف بذكائه الشديد وينقذ البشر أحياناً؟", a: "الدلفين" },
+                    { points: 400, q: "جماد بحرف الحاء نرتديه على الرأس للوقاية من الشمس؟", a: "قبعة (أو حذاء للأرجل)" },
+                    { points: 400, q: "حيوان يُسمى 'سفينة الصحراء' ويستطيع تحمل العطش لأيام طويلة؟", a: "الجمل" },
+                    { points: 600, q: "جماد بحرف السين نستخدمه لقص القماش والورق؟", a: "مقص" },
+                    { points: 600, q: "الطائر الوحيد الذي يستطيع الطيران إلى الخلف بمهارة فائقة؟", a: "طائر الطنان (Hummingbird)" }
+                ]
+            },
+            {
+                id: 4,
+                name: "شخصيات",
+                questions: [
+                    { points: 200, q: "من هو العالم الفيزيائي صاحب نظرية النسبية الشهيرة؟", a: "ألبرت أينشتاين" },
+                    { points: 200, q: "من هو المخترع الأمريكي الذي يُنسب إليه اختراع المصباح الكهربائي التجاري؟", a: "توماس إديسون" },
+                    { points: 400, q: "من هو الرحالة المسلم الشهير صاحب كتاب 'تحفة النظار في غرائب الأمصار وعجائب الأسفار'؟", a: "ابن بطوطة" },
+                    { points: 400, q: "من هو القائد المسلم الذي انتصر في معركة عين جالوت ضد المغول؟", a: "سيف الدين قطز" },
+                    { points: 600, q: "من هو الأديب المصري الشهير الحاصل على جائزة نوبل في الأدب عام 1988؟", a: "نجيب محفوظ" },
+                    { points: 600, q: "من هو الرسام والفنان العالمي الإيطالي الذي رسم لوحة الموناليزا الشهيرة؟", a: "ليوناردو دافنشي" }
+                ]
+            },
+            {
+                id: 5,
+                name: "كرة قدم",
+                questions: [
+                    { points: 200, q: "ما هو المنتخب الأكثر تتويجاً بكأس العالم في التاريخ؟", a: "البرازيل (5 مرات)" },
+                    { points: 200, q: "نادي أوروبي يحمل الرقم القياسي في الفوز بدوري أبطال أوروبا؟", a: "ريال مدريد" },
+                    { points: 400, q: "المنتخب العربي الذي صنع التاريخ وتأهل لنصف نهائي كأس العالم 2022؟", a: "المغرب" },
+                    { points: 400, q: "النادي الذي حقق السداسية التاريخية مرتين في الأعوام 2009 و 2020؟", a: "بايرن ميونخ (وبرشلونة 2009)" },
+                    { points: 600, q: "المنتخب الأكثر فوزاً ببطولة كأس أمم إفريقيا عبر التاريخ؟", a: "مصر (7 مرات)" },
+                    { points: 600, q: "من هو الهداف التاريخي لبطولة دوري أبطال أوروبا؟", a: "كريستيانو رونالدو" }
+                ]
+            },
+            {
+                id: 6,
+                name: "باب الحارة",
+                questions: [
+                    { points: 200, q: "ما هو لقب شخصية 'عصام' الشهيرة في أجزاء باب الحارة؟", a: "عصام الحلاق" },
+                    { points: 200, q: "من هو زعيم حارة الضبع في الجزء الأول؟", a: "العقيد أبو شهاب" },
+                    { points: 400, q: "ما اسم الحارة المنافسة لحارة الضبع في الأجزاء الأولى؟", a: "حارة أبو النار" },
+                    { points: 400, q: "من هي الشخصية التي عُرفت بجملة 'حيف يا زلمة'؟", a: "أبو شهاب" },
+                    { points: 600, q: "ما اسم الصيدلي الذي دخل الحارة وتزوج مأمون بيض البقر لاحقاً؟", a: "العتريس (أو حمزة)" },
+                    { points: 600, q: "في أي جزء ظهرت شخصية 'أبو جودت' كعميد للشرطة؟", a: "الجزء الأول" }
+                ]
+            },
+            {
+                id: 7,
+                name: "مسلسلات شامية",
+                questions: [
+                    { points: 200, q: "مسلسل شامي يتحدث عن حارة الشاغور وبطولة سامر المصري وبسام كوسا؟", a: "ليالي الصالحية" },
+                    { points: 200, q: "في مسلسل ليالي الصالحية، من الشخصية التي عُرفت بـ 'المعلم عمر'؟", a: "باسل خياط" },
+                    { points: 400, q: "ما اسم مسلسل البيئة الشامية الذي أدى فيه سلوم حداد دور ساعي البريد؟", a: "مسلسل الخوالي" },
+                    { points: 400, q: "مسلسل شامي يضم عائلات مثل أبو العز وأبو حاتم في فترة الاحتلال الفرنسي؟", a: "حارة القبة" },
+                    { points: 600, q: "المسلسل الذي يُعد المرجع الأساسي للدراما الشامية القديمة للمخرج تيسير السبيعي؟", a: "أيام شامية" },
+                    { points: 600, q: "في مسلسل باب الحارة، ما اسم زوجة أبو عصام الأولى؟", a: "سعاد (أم عصام)" }
+                ]
+            },
+            {
+                id: 8,
+                name: "كرتون زمان",
+                questions: [
+                    { points: 200, q: "في كرتون 'سندباد'، ما اسم المخلوق الصغير الظريف الطائر المرافق له؟", a: "ياسمينة" },
+                    { points: 200, q: "فتاة صغيرة تعيش مع جدها في جبال الألب، ما اسمها؟", a: "هايدي" },
+                    { points: 400, q: "ما اسم المدينة التي يعيش فيها 'عدنان ولينا' في عالم ما بعد الحرب؟", a: "قلعة المصنع" },
+                    { points: 400, q: "في الكابتن ماجد، ما اسم الفريق المنافس الأساسي الذي يلعب له بسّام؟", a: "فريق المجد / الفتوة" },
+                    { points: 600, q: "المحقق الذكي الصغير في الأنمي الياباني الذي قلصه دواء غريب؟", a: "كونان إيدوجاوا" },
+                    { points: 600, q: "الكلب الوفي المرافق لسالي في مسلسلات الكرتون القديمة؟", a: "سيزر" }
+                ]
+            },
+            {
+                id: 9,
+                name: "رسوم حديثة",
+                questions: [
+                    { points: 200, q: "فيلم ديزني الشهير الذي تدور قصته حول الأميرة ذات القوى الجليدية إلسا؟", a: "ملكة الثلج (Frozen)" },
+                    { points: 200, q: "السيارة الحمراء بطل سلسلة أفلام بيكسار الشهيرة (Cars)؟", a: "برق مكوين" },
+                    { points: 400, q: "في فيلم 'Inside Out'، ما هي المشاعر الخمسة داخل رأس الطفلة رايلي؟", a: "الفرح، الحزن، الغضب، الخوف، الاشمئزاز" },
+                    { points: 400, q: "السمكة خفيفة الذاكرة التي ترافق مارلين في فيلم Finding Nemo؟", a: "دوري" },
+                    { points: 600, q: "عالم سحري لعائلة ماديراغي في فيلم ديزني 'Encanto'؟", a: "كاسيتا (البيت السحري)" },
+                    { points: 600, q: "في أنمي 'Demon Slayer'، ما اسم البطل الذي يحاول علاج أخته؟", a: "تانجيرو كامادو" }
+                ]
+            },
+            {
+                id: 10,
+                name: "التاريخ",
+                questions: [
+                    { points: 200, q: "في أي عام ميلادي وقعت غزوة بدر الكبرى؟", a: "السنة الثانية للهجرة (624 م)" },
+                    { points: 200, q: "الدولة التي قادت العالم الإسلامي خلال فترة الخلافة لقرون؟", a: "الدولة العثمانية" },
+                    { points: 400, q: "القائد المسلم الذي فتح القسطنطينية في عام 1453 م؟", a: "السلطان محمد الفاتح" },
+                    { points: 400, q: "في أي عام ميلادي انتهت الحرب العالمية الثانية؟", a: "عام 1945" },
+                    { points: 600, q: "المعركة الفاصلة التي أنهت الوجود الساساني الفارسي بالكامل؟", a: "معركة نهاوند" },
+                    { points: 600, q: "مؤسس الدولة الأموية في الشام بعد الخلفاء الراشدين؟", a: "معاوية بن أبي سفيان" }
+                ]
+            },
+            {
+                id: 11,
+                name: "الرياضيات",
+                questions: [
+                    { points: 200, q: "ما هو الناتج الصحيح لضرب 7 في 8؟", a: "56" },
+                    { points: 200, q: "ما هو العدد الأولي الزوجي الوحيد في الرياضيات؟", a: "الرقم 2" },
+                    { points: 400, q: "مساحة مربع طول ضلعه 9 سنتيمترات؟", a: "81 سنتيمتر مربع" },
+                    { points: 400, q: "مجموع قياسات الزوايا الداخلية لأي مثلث؟", a: "180 درجة" },
+                    { points: 600, q: "الجذر التربيعي للعدد 144 مضافاً إليه العدد 10؟", a: "22" },
+                    { points: 600, q: "نظرية الهندسة للمثلث القائم (أ² + ب² = ج²)؟", a: "نظرية فيثاغورس" }
+                ]
+            },
+            {
+                id: 12,
+                name: "العلوم",
+                questions: [
+                    { points: 200, q: "الرمز الكيميائي لعنصر الذهب الخالص؟", a: "Au" },
+                    { points: 200, q: "الغلاف الجوي للأرض غني بأي غاز بنسبة 78%؟", a: "النيتروجين" },
+                    { points: 400, q: "وحدة قياس القوة المعتمدة في النظام الدولي للوحدات؟", a: "النيوتن" },
+                    { points: 400, q: "سرعة الضوء في الفراغ تقريباً كم/ثانية؟", a: "300,000 كم/ثانية" },
+                    { points: 600, q: "الرقم الهيدروجيني (pH) للمادة المتعادلة كالماء النقي؟", a: "الرقم 7" },
+                    { points: 600, q: "العنصر الأساسي الذي يدخل في تركيب جميع المركبات العضوية؟", a: "الكربون (C)" }
+                ]
+            }
+        ];
+
+        // تهيئة الشبكة وتوليد المربعات تلقائياً
+        const boardGrid = document.getElementById('boardGrid');
+        let currentCatIdx = 0;
+        let currentQIdx = 0;
+        let activeTileElement = null;
+        let currentAnswerText = "";
+
+        // بناء الشبكة لعرض جميع الفئات والأسئلة (8 أعمدة لتسع الفئات الكثيرة)
+        boardGrid.style.gridTemplateColumns = `repeat(6, 1fr)`;
+
+        categoriesData.forEach((cat, catIdx) => {
+            cat.questions.forEach((qObj, qIdx) => {
+                const tile = document.createElement('div');
+                tile.classList.add('tile');
+                tile.innerHTML = `<span>${qObj.points}</span><span class="cat-label">${cat.name}</span>`;
+                
+                tile.addEventListener('click', function() {
+                    if(!tile.classList.contains('disabled')) {
+                        openQuestionModal(catIdx, qIdx, tile);
+                    }
+                });
+                
+                boardGrid.appendChild(tile);
+            });
+        });
+
+        function openQuestionModal(catIdx, qIdx, tileElement) {
+            currentCatIdx = catIdx;
+            currentQIdx = qIdx;
+            activeTileElement = tileElement;
+
+            const category = categoriesData[catIdx];
+            const qData = category.questions[qIdx];
+            currentAnswerText = qData.a;
+
+            document.getElementById('modalCategory').innerText = `فئة: ${category.name} (${qData.points} نقطة)`;
+            document.getElementById('modalQuestionText').innerText = qData.q;
+            
+            const ansDiv = document.getElementById('modalAnswerText');
+            ansDiv.innerText = "[اضغط هنا لعرض الإجابة الصحيحة]";
+            ansDiv.style.color = "#16a34a";
+
+            document.getElementById('questionModal').style.display = 'flex';
+        }
+
+        function revealAnswer() {
+            const ansDiv = document.getElementById('modalAnswerText');
+            ansDiv.innerText = `الإجابة الصحيحة: ${currentAnswerText}`;
+            ansDiv.style.color = "#dc2626";
+        }
+
+        function closeModal() {
+            document.getElementById('questionModal').style.display = 'none';
+            if(activeTileElement) {
+                activeTileElement.classList.add('disabled');
+                activeTileElement.innerHTML = `<span>✓</span><span class="cat-label">تم</span>`;
+            }
+        }
+
+        // نظام النقاط للاعبين
+        let scores = { player1: 400, player2: 400 };
+
+        function adjustScore(player, amount) {
+            scores[player] += amount;
+            document.getElementById('score1').innerText = scores.player1;
+            document.getElementById('score2').innerText = scores.player2;
+        }
+    </script>
+</body>
+</html>
