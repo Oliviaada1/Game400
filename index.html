@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>لعبة لوحة التحدي - 30 تصنيفاً كاملاً</title>
+    <title>لعبة لوحة التحدي الكبرى - 60 تصنيفاً متجدداً</title>
     <style>
         * {
             box-sizing: border-box;
@@ -13,7 +13,7 @@
         }
 
         body {
-            background: linear-gradient(135deg, #1e1b4b, #312e81, #0f172a);
+            background: linear-gradient(135deg, #0f172a, #312e81, #4c1d95);
             color: #fff;
             display: flex;
             justify-content: center;
@@ -24,7 +24,7 @@
 
         .game-container {
             width: 100%;
-            max-width: 1250px;
+            max-width: 1300px;
             height: 97vh;
             background: #f8fafc;
             color: #333;
@@ -32,7 +32,7 @@
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            padding: 20px;
+            padding: 15px;
             box-shadow: 0 25px 60px rgba(0,0,0,0.6);
         }
 
@@ -48,13 +48,13 @@
             text-align: center;
             margin-bottom: 5px;
         }
-        .selection-header h2 { color: #312e81; font-size: 1.9rem; margin-bottom: 3px; }
-        .selection-header p { color: #64748b; font-size: 1.05rem; font-weight: bold; }
+        .selection-header h2 { color: #312e81; font-size: 1.8rem; margin-bottom: 2px; }
+        .selection-header p { color: #64748b; font-size: 1rem; font-weight: bold; }
 
         .categories-picker-grid {
             display: grid;
-            grid-template-columns: repeat(5, 1fr);
-            gap: 10px;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 8px;
             overflow-y: auto;
             flex-grow: 1;
             padding: 5px;
@@ -62,24 +62,24 @@
 
         .picker-card {
             background: #ffffff;
-            border: 3px solid #e2e8f0;
-            border-radius: 12px;
-            padding: 10px;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            padding: 8px;
             text-align: center;
             cursor: pointer;
-            transition: all 0.25s ease;
+            transition: all 0.2s ease;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            min-height: 85px;
-            box-shadow: 0 3px 5px rgba(0,0,0,0.03);
+            min-height: 75px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
         }
 
         .picker-card:hover {
             border-color: #6366f1;
             transform: translateY(-2px);
-            box-shadow: 0 6px 15px rgba(99, 102, 241, 0.2);
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.2);
         }
 
         .picker-card.selected {
@@ -87,19 +87,19 @@
             border-color: #4f46e5;
             color: #312e81;
             font-weight: bold;
-            box-shadow: 0 5px 15px rgba(79, 70, 229, 0.3);
+            box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3);
         }
 
-        .picker-card h4 { font-size: 1rem; margin-bottom: 2px; color: #1e1b4b; }
-        .picker-card span { font-size: 0.75rem; color: #64748b; }
+        .picker-card h4 { font-size: 0.9rem; margin-bottom: 2px; color: #1e1b4b; }
+        .picker-card span { font-size: 0.65rem; color: #64748b; }
 
         .start-game-btn {
             background: linear-gradient(135deg, #4f46e5, #9333ea);
             color: white;
             border: none;
-            padding: 14px;
-            border-radius: 14px;
-            font-size: 1.25rem;
+            padding: 12px;
+            border-radius: 12px;
+            font-size: 1.2rem;
             cursor: pointer;
             font-weight: bold;
             transition: 0.3s;
@@ -130,24 +130,41 @@
             display: flex;
             justify-content: space-between;
             background: linear-gradient(135deg, #1e1b4b, #4f46e5);
-            padding: 12px 20px;
-            border-radius: 14px;
+            padding: 10px 15px;
+            border-radius: 12px;
             color: white;
             align-items: center;
             box-shadow: 0 4px 15px rgba(0,0,0,0.2);
         }
 
-        .game-header h1 { font-size: 1.3rem; }
+        .game-header h1 { font-size: 1.1rem; }
+
+        .turn-indicator {
+            background: #fbbf24;
+            color: #78350f;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.95rem;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.04); }
+            100% { transform: scale(1); }
+        }
 
         .game-header button {
             background: rgba(255,255,255,0.2);
             border: none;
             color: white;
-            padding: 8px 16px;
-            border-radius: 8px;
+            padding: 6px 12px;
+            border-radius: 6px;
             cursor: pointer;
             transition: 0.2s;
             font-weight: bold;
+            font-size: 0.85rem;
         }
 
         .game-header button:hover { background: rgba(255,255,255,0.35); }
@@ -155,35 +172,35 @@
         .board-grid {
             display: grid;
             grid-template-columns: repeat(6, 1fr);
-            gap: 10px;
+            gap: 8px;
             flex-grow: 1;
-            margin: 12px 0;
+            margin: 10px 0;
             overflow-y: auto;
             padding: 5px;
         }
 
         .tile {
             background: linear-gradient(135deg, #ffffff, #f1f5f9);
-            border-radius: 12px;
+            border-radius: 10px;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            font-size: 1.35rem;
+            font-size: 1.25rem;
             font-weight: bold;
             color: #1e1b4b;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.06);
+            box-shadow: 0 3px 6px rgba(0,0,0,0.05);
             cursor: pointer;
-            transition: all 0.25s ease;
-            min-height: 80px;
+            transition: all 0.2s ease;
+            min-height: 70px;
             border: 2px solid #e2e8f0;
-            padding: 5px;
+            padding: 4px;
         }
 
         .tile span.cat-label {
-            font-size: 0.65rem;
+            font-size: 0.6rem;
             color: #64748b;
-            margin-top: 4px;
+            margin-top: 3px;
             text-align: center;
             white-space: nowrap;
             overflow: hidden;
@@ -194,7 +211,7 @@
         .tile:hover {
             background: linear-gradient(135deg, #e0e7ff, #c7d2fe);
             border-color: #4f46e5;
-            transform: translateY(-3px);
+            transform: translateY(-2px);
             color: #312e81;
         }
 
@@ -215,21 +232,28 @@
             justify-content: space-between;
             align-items: center;
             background: #fff;
-            padding: 14px 20px;
-            border-radius: 16px;
-            box-shadow: 0 -4px 20px rgba(0,0,0,0.06);
+            padding: 10px 15px;
+            border-radius: 14px;
+            box-shadow: 0 -4px 15px rgba(0,0,0,0.05);
         }
 
         .player-box {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
             background: #f1f5f9;
-            padding: 10px 22px;
-            border-radius: 40px;
+            padding: 8px 18px;
+            border-radius: 35px;
             font-weight: bold;
-            font-size: 1.1rem;
+            font-size: 1rem;
             border: 2px solid #e2e8f0;
+            transition: 0.3s;
+        }
+
+        .player-box.active-turn {
+            border-color: #fbbf24;
+            box-shadow: 0 0 12px rgba(251, 191, 36, 0.5);
+            transform: scale(1.02);
         }
 
         .player-box.red-theme {
@@ -247,10 +271,10 @@
         .score-btn {
             background: rgba(0,0,0,0.15);
             border: none;
-            width: 36px;
-            height: 36px;
+            width: 30px;
+            height: 30px;
             border-radius: 50%;
-            font-size: 1.3rem;
+            font-size: 1.1rem;
             cursor: pointer;
             color: inherit;
             display: flex;
@@ -266,22 +290,22 @@
             border: none;
             border-bottom: 2px dashed rgba(255,255,255,0.7);
             color: inherit;
-            font-size: 1.15rem;
+            font-size: 1.05rem;
             font-weight: bold;
             text-align: center;
-            width: 110px;
+            width: 95px;
             outline: none;
             padding: 2px;
         }
 
         .center-logo h2 {
-            font-size: 1.5rem;
+            font-size: 1.2rem;
             background: linear-gradient(135deg, #4f46e5, #9333ea);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
-        /* نافذة السؤال (Modal) */
+        /* نافذة السؤال والحماس (Modal) */
         .modal {
             display: none;
             position: fixed;
@@ -295,13 +319,13 @@
 
         .modal-content {
             background: white;
-            padding: 30px;
-            border-radius: 20px;
+            padding: 25px;
+            border-radius: 18px;
             width: 100%;
             max-width: 580px;
             text-align: center;
             color: #333;
-            box-shadow: 0 25px 60px rgba(0,0,0,0.5);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.5);
             animation: modalPop 0.3s ease;
         }
 
@@ -310,54 +334,54 @@
             100% { transform: scale(1); opacity: 1; }
         }
 
-        .modal-content h3 { color: #4f46e5; font-size: 1.2rem; margin-bottom: 10px; }
-        .modal-content p { font-size: 1.35rem; margin: 15px 0; line-height: 1.6; color: #1e1b4b; font-weight: 600; }
+        .modal-content h3 { color: #4f46e5; font-size: 1.1rem; margin-bottom: 4px; }
+        .modal-turn-alert { background: #fee2e2; color: #991b1b; padding: 5px; border-radius: 6px; font-weight: bold; margin-bottom: 8px; font-size: 0.95rem; }
+        .modal-content p { font-size: 1.2rem; margin: 12px 0; line-height: 1.5; color: #1e1b4b; font-weight: 600; }
         
         #modalAnswerText {
             background: #f8fafc;
-            padding: 15px;
-            border-radius: 12px;
+            padding: 10px;
+            border-radius: 10px;
             border: 2px dashed #cbd5e1;
             color: #16a34a;
             font-weight: bold;
             cursor: pointer;
-            margin-top: 15px;
+            margin-top: 8px;
             transition: 0.2s;
-            font-size: 1.2rem;
+            font-size: 1.05rem;
         }
 
         #modalAnswerText:hover { background: #f1f5f9; }
 
-        .modal-close-btn {
-            margin-top: 20px;
-            padding: 12px 30px;
-            background: #1e1b4b;
-            color: white;
-            border: none;
-            border-radius: 10px;
-            cursor: pointer;
-            font-size: 1.1rem;
-            transition: 0.2s;
-            font-weight: bold;
+        .modal-actions {
+            display: flex;
+            gap: 8px;
+            justify-content: center;
+            margin-top: 15px;
         }
 
-        .modal-close-btn:hover { background: #312e81; }
+        .btn-correct { background: #16a34a; color: white; border: none; padding: 8px 16px; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 0.95rem; }
+        .btn-wrong { background: #dc2626; color: white; border: none; padding: 8px 16px; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 0.95rem; }
+        .btn-pass { background: #d97706; color: white; border: none; padding: 8px 16px; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 0.95rem; }
+        .btn-correct:hover { background: #15803d; }
+        .btn-wrong:hover { background: #b91c1c; }
+        .btn-pass:hover { background: #b45309; }
     </style>
 </head>
 <body>
 
     <div class="game-container">
         
-        <!-- شاشة اختيار الفئات (30 تصنيفاً) -->
+        <!-- شاشة اختيار الفئات (60 تصنيفاً متجدداً) -->
         <div id="selectionScreen">
             <div class="selection-header">
-                <h2>🎮 اختر 6 فئات من بين 30 تصنيفاً لنبدأ التحدي</h2>
+                <h2>🎮 اختر 6 فئات من بين 60 تصنيفاً جديداً ومميزاً</h2>
                 <p id="counterText">تم اختيار (0 / 6) فئات</p>
             </div>
             
             <div class="categories-picker-grid" id="pickerGrid"></div>
 
-            <button class="start-game-btn" id="startBtn" disabled onclick="startGame()">ابدأ لعبة التحدي الكبرى الآن! 🚀</button>
+            <button class="start-game-btn" id="startBtn" disabled onclick="startGame()">ابدأ المعركة الحماسية الآن! 🚀</button>
         </div>
 
         <!-- شاشة اللعبة الفعلية -->
@@ -365,297 +389,547 @@
             <header class="game-header">
                 <button onclick="location.reload()">🔄 تغيير الفئات</button>
                 <h1>🏆 لوحة التحدي التفاعلية</h1>
-                <button onclick="alert('انقر على اسم أي لاعب لتغييره، اختر المربع، اطرح السؤال، ثم انقر لإظهار الإجابة!')">💡 تعليمات اللعب</button>
+                <div class="turn-indicator" id="turnDisplay">دور اللاعب: فرح</div>
+                <button onclick="alert('اختر مربعاً، يجب على صاحب الدور الإجابة. إذا أخطأ يُمنح المنافس فرصة الخطف!')">💡 القوانين</button>
             </header>
 
             <main class="board-grid" id="boardGrid"></main>
 
             <footer class="players-footer">
-                <div class="player-box blue-theme">
-                    <button class="score-btn" onclick="adjustScore('player1', -200)">-</button>
-                    <span id="score1">400</span>
-                    <button class="score-btn" onclick="adjustScore('player1', 200)">+</button>
-                    <input type="text" class="editable-name" value="فرح">
+                <div class="player-box blue-theme active-turn" id="p1Box">
+                    <button class="score-btn" onclick="adjustScore('player1', -currentPoints)">-</button>
+                    <span id="score1">0</span>
+                    <button class="score-btn" onclick="adjustScore('player1', currentPoints)">+</button>
+                    <input type="text" class="editable-name" id="name1" value="فرح" oninput="updateTurnDisplay()">
                 </div>
                 
                 <div class="center-logo">
-                    <h2>🎯 لوحة التحدي</h2>
+                    <h2>🔥 تحدي الأدوار</h2>
                 </div>
 
-                <div class="player-box red-theme">
-                    <button class="score-btn" onclick="adjustScore('player2', -200)">-</button>
-                    <span id="score2">400</span>
-                    <button class="score-btn" onclick="adjustScore('player2', 200)">+</button>
-                    <input type="text" class="editable-name" value="ياسمين">
+                <div class="player-box red-theme" id="p2Box">
+                    <button class="score-btn" onclick="adjustScore('player2', -currentPoints)">-</button>
+                    <span id="score2">0</span>
+                    <button class="score-btn" onclick="adjustScore('player2', currentPoints)">+</button>
+                    <input type="text" class="editable-name" id="name2" value="ياسمين" oninput="updateTurnDisplay()">
                 </div>
             </footer>
         </div>
 
     </div>
 
-    <!-- نافذة السؤال المنبثقة -->
+    <!-- نافذة السؤال الحماسي -->
     <div id="questionModal" class="modal">
         <div class="modal-content">
             <h3 id="modalCategory">اسم الفئة</h3>
+            <div class="modal-turn-alert" id="modalTurnAlert">دور اللاعب: ... للإجابة الآن!</div>
             <p id="modalQuestionText">نص السؤال سيظهر هنا...</p>
-            <div id="modalAnswerText" onclick="revealAnswer()">[اضغط هنا لعرض الإجابة الصحيحة]</div>
-            <button class="modal-close-btn" onclick="closeModal()">إغلاق وتسجيل النقاط ✓</button>
+            <div id="modalAnswerText" onclick="revealAnswer()">[اضغط هنا لعرض الإجابة الصحيحة ومقارنتها]</div>
+            
+            <div class="modal-actions">
+                <button class="btn-correct" onclick="awardPoints(true)">إجابة صحيحة (+نقاط)</button>
+                <button class="btn-wrong" onclick="handleWrongAnswer()">إجابة خاطئة (خطف الدور!)</button>
+                <button class="btn-pass" onclick="closeModal()">تخطي وإغلاق</button>
+            </div>
         </div>
     </div>
 
     <script>
-        // بنك الأسئلة المكون من 30 تصنيفاً متكاملاً
+        // بنك الأسئلة المكون من 60 تصنيفاً جديداً ومتنوعاً بنقاط 200, 400, 600
         const allCategories = [
-            { id: 1, name: "كرة القدم", icon: "⚽", questions: [
-                {points:200, q:"المنتخب الأكثر تتويجاً بكأس العالم؟", a:"البرازيل"},
-                {points:200, q:"النادي الأكثر فوزاً بدوري الأبطال؟", a:"ريال مدريد"},
-                {points:400, q:"المنتخب العربي في نصف نهائي 2022؟", a:"المغرب"},
-                {points:400, q:"النادي الحاصل على السداسية مرتين؟", a:"بايرن ميونخ وبرشلونة"},
-                {points:600, q:"المنتخب الأكثر فوزاً بأمم إفريقيا؟", a:"مصر"},
-                {points:600, q:"الهداف التاريخي لدوري الأبطال؟", a:"كريستيانو رونالدو"}
+            { id: 1, name: "منتخبات عالمية", icon: "🌍", questions: [
+                {points:200, q:"من هو المنتخب اللاتيني الملقب بالتانغو؟", a:"الأرجنتين"},
+                {points:200, q:"ما هو لقب منتخب إيطاليا لكرة القدم؟", a:"الآزوري"},
+                {points:400, q:"المنتخب الملقب بـ 'الماكينات الألمانية'؟", a:"ألمانيا"},
+                {points:400, q:"ما هو لقب منتخب بلجيكا الشهير؟", a:"الشياطين الحمر"},
+                {points:600, q:"منتخب آسيوي حقق مفاجآت كبرى وأطاح بأبطال واسمه 'الساموراي'؟", a:"اليابان"},
+                {points:600, q:"منتخب إفريقي يُطلق عليه لقب 'أسود التيرانجا'؟", a:"السنغال"}
             ]},
-            { id: 2, name: "الدوري الإنجليزي", icon: "🏴󠁧󠁢󠁥󠁮󠁧󠁿", questions: [
-                {points:200, q:"النادي الأكثر تتويجاً بالبريميرليغ؟", a:"مانشستر يونايتد"},
-                {points:200, q:"لقب نادي أرسنال؟", a:"المدفعجية"},
-                {points:400, q:"الهدف التاريخي للدوري الإنجليزي؟", a:"آلان شيرر"},
-                {points:400, q: "معجزة ليستر سيتي في أي عام فازوا؟", a:"2016"},
-                {points:600, q:"ملعب نادي ليفربول الشهير؟", a:"أنفيلد"},
-                {points:600, q:"ملعب مانشستر سيتي؟", a:"ملعب الاتحاد"}
+            { id: 2, name: "دوري أبطال أوروبا", icon: "⭐", questions: [
+                {points:200, q:"ما هو النشيد الشهير الذي يعزف قبل مباريات دوري الأبطال؟", a:"نشيد التشامبيونزليغ (The Champions)"},
+                {points:200, q:"أي نادي حقق لقب النسخة الأولى من بطولة دوري أبطال أوروبا تاريخياً؟", a:"ريال مدريد"},
+                {points:400, q:"من هو أكثر نادٍ إنجليزي تحقيقاً للبطولة؟", a:"ليفربول (6 مرات)"},
+                {points:400, q:"ملعب نهائي دوري الأبطال الشهير الذي شهد ريمونتادا ميلان وليفربول 2005؟", a:"ملعب أتاتورك (إسطنبول)"},
+                {points:600, q:"النادي الوحيد الذي توج بالبطولة دون تلقي أي هزيمة في الموسم؟", a:"مانشستر يونايتد / أو ميلان"},
+                {points:600, q:"من هو اللاعب صاحب أسرع هدف في تاريخ نهائيات دوري أبطال أوروبا؟", a:"باولو مالديني"}
             ]},
-            { id: 3, name: "الدوري الإسباني", icon: "🇪🇸", questions: [
-                {points:200, q:"النادي الأكثر تتويجاً بالليغا؟", a:"ريال مدريد"},
-                {points:200, q:"ملعب نادي برشلونة؟", a:"كامب نو"},
-                {points:400, q:"ما اسم لقاء القمة بين ريال وبرشلونة؟", a:"كلاسيكو الأرض"},
-                {points:400, q:"بطل الليغا 2021 خارج القطبين؟", a:"اتلتيكو مدريد"},
-                {points:600, q:"الهداف التاريخي لليغا؟", a:"ليونيل ميسي"},
-                {points:600, q:"ملعب ريال مدريد التاريخي؟", a:"سانتياغو برنابيو"}
+            { id: 3, name: "أساطير الكرة", icon: "👑", questions: [
+                {points:200, q:"ما هو الاسم المستعار للأسطورة البرازيلي الراحل إدسون أرانتس دو ناسيمينتو؟", a:"بيليه"},
+                {points:200, q:"اللاعب الأرجنتيني الشهير الذي لُقب بـ 'الفتي الذهبي' وصاحب هدف يد الله؟", a:"دييغو مارادونا"},
+                {points:400, q:"ما هو النادي الأوروبي الوحيد الذي لعب له كريستيانو رونالدو في بداياته قبل ريال مدريد ويونايتد؟", a:"سبورتينغ لشبونة"},
+                {points:400, q:"من هو اللاعب الفرنسي الذي قاد فرنسا لكأس العالم 1998 وأبدع مع يوفنتوس وريال مدريد؟", a:"زين الدين زيدان"},
+                {points:600, q:"اللاعب البرازيلي الساحر الذي حاز جائزة الأفضل عالمياً واشتهر بمهاراته الفردية مع برشلونة وميلان؟", a:"رونالدينيو"},
+                {points:600, q:"من هو الهداف التاريخي لبطولة كأس الأمم الأوروبية (يورو)؟", a:"كريستيانو رونالدو"}
             ]},
-            { id: 4, name: "ألعاب الفيديو", icon: "🎮", questions: [
-                {points:200, q:"لعبة المكعبات والبناء الأشهر؟", a:"ماين كرافت"},
-                {points:200, q:"لعبة العالم المفتوح للسرقة والجريمة؟", a:"GTA"},
-                {points:400, q:"لعبة الباتل رويال لإيبك جيمز؟", a:"فورت نايت"},
-                {points:400, q:"لعبة كرة القدم الشهيرة من EA؟", a:"إي إيه سبورتس إف سي"},
-                {points:600, q:"شخصية السباك الأحمر من نينتندو؟", a:"ماريو"},
-                {points:600, q: "لعبة العالم المفتوح الصعبة والمذهلة؟", a:"إلدن رينغ"}
+            { id: 4, name: "ألعاب بلايستيشن", icon: "🎮", questions: [
+                {points:200, q:"ما هو اسم شخصية الحرب الشهيرة المحارب المتقشف كريتوس في لعبة God of War؟", a:"كريتوس"},
+                {points:200, q:"ما اسم بطلة الألعاب الشهيرة باحثة الآثار والقبور لارا كروفت في Tomb Raider؟", a:"لارا كروفت"},
+                {points:400, q:"ما اسم لعبة النجاة والزومبي الأسطورية من تطوير نوتي دوغ (قصة جويل وإيلي)؟", a:"ذا لاست أوف أس (The Last of Us)"},
+                {points:400, q:"لعبة عالم مفتوح وقتال جماعي اشتهرت بالجزيرة والرقصات وبناء الحصون؟", a:"فورت نايت"},
+                {points:600, q:"لعبة مغامرات رعاة البقر الملحمية التي تروي قصة آرثر مورغان (صوت الغرب الأمريكي)؟", a:"ريد ديد ريدمبشن 2 (Red Dead Redemption 2)"},
+                {points:600, q:"ما اسم سوني بلايستيشن المحمول الأول الذي صدر عام 2004 واشتهر بألعاب الجيب؟", a:"بي إس بي (PSP)"}
             ]},
-            { id: 5, name: "مسلسلات أجنبية", icon: "🎬", questions: [
-                {points:200, q:"مسلسل الأصدقاء الستة في نيويورك؟", a:"فريندز"},
-                {points:200, q:"مدرس كيمياء يتحول لتجارة المخدرات؟", a:"Breaking Bad"},
-                {points:400, q:"مسلسل عصابات برمنغهام؟", a:"بيكي بلايندرز"},
-                {points:400, q:"مسلسل الفنتازيا وصراع العروش؟", a:"Game of Thrones"},
-                {points:600, q:"الهروب الذكي من السجن؟", a:"بريزون بريك"},
-                {points:600, q:"مسلسل الجزيرة والغامض؟", a:"من (From)"}
+            { id: 5, name: "عالم مارفل", icon: "🦸‍♂️", questions: [
+                {points:200, q:"ما هو الاسم الحقيقي لشخصية 'آيرون مان' (الرجل الحديدي) في عالم مارفل؟", a:"توني ستارك"},
+                {points:200, q:"ما هو اسم المطرقة السحرية الخاصة بالإله ثور في أفلام مارفل؟", a:"ميولنير (Mjolnir)"},
+                {points:400, q:"ما اسم الشرير العملاق الذي جمع أحجار الأبدية لحذف نصف سكان الكون في فيلم Avengers؟", a:"ثانوس (Thanos)"},
+                {points:400, q:"من هو البطل الخارق السريع الذي يرتدي درعاً أحمر ويتحكم بدرع النجمة؟ (ليس فلاش بل بطل أمريكي)", a:"كابتن أمريكا"},
+                {points:600, q:"ما اسم المدينة الإفريقية الخيالية المتقدمة تكنولوجياً وموطن النمر الأسود (بلاك بانتر)؟", a:"واكاندا (Wakanda)"},
+                {points:600, q:"ما اسم الدكتور الساحر العبقري الذي يفتح بوابات الأبعاد في مارفل؟", a:"دكتور سترينج"}
             ]},
-            { id: 6, name: "الأنمي", icon: "🍥", questions: [
-                {points:200, q:"أنمي القراصنة للبحث عن الكنز؟", a:"ون بيس"},
-                {points:200, q:"أنمي النينجا والقرية؟", a:"ناروتو"},
-                {points:400, q:"الأنمي المرعب ضد العمالقة؟", a:"هجوم العمالقة"},
-                {points:400, q: "أنمي صائدو الشياطين؟", a:"ديمون سلاير"},
-                {points:600, q:"أنمي الجوجوتسو والقتال السحري؟", a:"جوجوتسو كايسن"},
-                {points:600, q:"أنمي الشينيغامي وإيتشيغو؟", a:"بليتش"}
+            { id: 6, name: "أفلام الرعب", icon: "👻", questions: [
+                {points:200, q:"ما اسم الدمية المسكونة الشهيرة التي تدور حولها سلسلة أفلام الرعب 'The Conjuring'؟", a:"أنابيل (Annabelle)"},
+                {points:200, q:"ما اسم القاتل السلسلسلي المرعب الذي يرتدي قنَاع الصراخ الشهير في سلسلة أفلام Scream؟", a:"غوست فيس (Ghostface)"},
+                {points:400, q:"ما اسم المهرج الشرير المرعِب الذي يظهر للأطفال في مدينة ديري بفيلم 'It'؟", a:"پينيوايز (Pennywise)"},
+                {points:400, q:"في فيلم الرعب الكلاسيكي The Exorcist، ما هي المشكلة المرعبة التي تصيب الفتاة الصغيرة ريغان؟", a:"الاستحواذ الشيطاني"},
+                {points:600, q:"ما اسم الراهبة المرعبة ذات الوجه الشاحب التي ظهرت في سلسلة أفلام الكونجورينغ؟", a:"فالاك (Valak)"},
+                {points:600, q:"ما اسم اللعبة المخيفة التي استخدمها الأصدقاء في فيلم Ouija لاستدعاء الأرواح؟", a:"لوويجا (لوحة الارواح)"}
             ]},
-            { id: 7, name: "القرآن الكريم", icon: "📖", questions: [
-                {points:200, q:"سورة تُسمى قلب القرآن؟", a:"سورة يس"},
-                {points:200, q:"كم عدد سور القرآن الكريم؟", a:"114 سورة"},
-                {points:400, q:"سورة لا تبدأ بالبسملة؟", a:"سورة التوبة"},
-                {points:400, q:"أطول سورة في القرآن؟", a:"سورة البقرة"},
-                {points:600, q:"سورة تُعدل ثلث القرآن؟", a:"سورة الإخلاص"},
-                {points:600, q:"سورة ذُكر فيها البسملة مرتين؟", a:"سورة النمل"}
+            { id: 7, name: "تاريخ إسلامي", icon: "🕌", questions: [
+                {points:200, q:"من هو أول الخلفاء الراشدين بعد وفاة النبي محمد صلى الله عليه وسلم؟", a:"أبو بكر الصديق"},
+                {points:200, q:"ما هي المعركة الإسلامية الكبرى التي فتحت فيها فارس وتُسمى 'فتح الفتوح'؟", a:"معركة نهاوند"},
+                {points:400, q:"من هو القائد المسلم الذي انتصر في معركة حطين ضد الصليبيين واستعاد القدس؟", a:"صلاح الدين الأيوبي"},
+                {points:400, q:"ما اسم المدينة التي هجر إليها المسلمون الأوائل قبل المدينة المنورة (في الهجرة الأولى)؟", a:"الحبشة"},
+                {points:600, q:"من هو الصحابي الذي اهتز لموته عرش الرحمن وكان مقرباً من الأنصار والمهاجرين؟", a:"سعد بن معاذ"},
+                {points:600, q:"ما هي الدولة الإسلامية التي امتدت في إسبانيا وأسست حضارة قرطبة والأندلس؟", a:"الدولة الأموية في الأندلس"}
             ]},
-            { id: 8, name: "السيرة النبوية", icon: "🕌", questions: [
-                {points:200, q:"أين وُلد النبي محمد صلى الله عليه وسلم؟", a:"مكة المكرمة"},
-                {points:200, q:"ما اسم ناقة الهجرة؟", a:"القصواء"},
-                {points:400, q:"غزوة حدثت في العام الثالث للهجرة؟", a: "غزوة أحد"},
-                {points:400, q:"الصحابي الملقب بسيف الله المسلول؟", a:"خالد بن الوليد"},
-                {points:600, q:"عام توفيت فيه خديجة وعم النبي؟", a:"عام الحزن"},
-                {points:600, q:"أول سفير في الإسلام؟", a:"مصعب بن عمير"}
+            { id: 8, name: "دول وعواصم", icon: "🏛️", questions: [
+                {points:200, q:"ما هي عاصمة جمهورية مصر العربية؟", a:"القاهرة"},
+                {points:200, q:"ما هي عاصمة دولة فرنسا الشهيرة ببرج إيفل؟", a:"باريس"},
+                {points:400, q:"ما هي عاصمة دولة إيطاليا التاريخية؟", a:"روما"},
+                {points:400, q:"ما هي عاصمة دولة ألمانيا الاقتصادية الكبرى؟", a:"برلين"},
+                {points:600, q:"ما هي عاصمة دولة روسيا الضخمة؟", a:"موسكو"},
+                {points:600, q:"ما هي عاصمة دولة الصين الشعبية؟", a:"بكين"}
             ]},
-            { id: 9, name: "طعام عربي", icon: "🍲", questions: [
-                {points:200, q:"أكلة خليجية شهيرة بالأرز واللحم؟", a:"الكبسة"},
-                {points:200, q:"أكلة شامية من الحمص والطحينة؟", a:"حمص بالطحينة"},
-                {points:400, q: "طبق مغاربي بالسميد والخضار؟", a:"الكسكسي"},
-                {points:400, q:"أكلة أردنية باللحم والجميد؟", a:"المنسف"},
-                {points:600, q:"حلويات رمضانية محشية بالقشطة؟", a:"القطايف والكنافة"},
-                {points:600, q:"أكلة شتوية من التمر والسمن؟", a:"العصيدة أو الحنيني"}
+            { id: 9, name: "فضاء وكواكب", icon: "🚀", questions: [
+                {points:200, q:"ما هو الكوكب الأقرب إلى شمسنا في المجموعة الشمسية؟", a:"عطارد"},
+                {points:200, q:"ما هو أكبر كوكب حجماً في نظامنا الشمسي؟", a:"المشتري"},
+                {points:400, q:"ما هو الكوكب المعروف باسم 'الكوكب الأحمر'؟", a:"المريخ"},
+                {points:400, q:"ما هو الكوكب الذي يحيط به نظام حلقات جليدية وصخرية مذهلة؟", a:"زحل"},
+                {points:600, q:"ما هي المجرة الضخمة التي ينتمي إليها كوكبنا الأرض والشمس؟", a:"مجرة درب التبانة (الطريق الصليبي)"},
+                {points:600, q:"ما هو الاسم العلمي للثقب الأسود العميق في الفضاء؟", a:"الثقب الأسود (Black Hole)"}
             ]},
-            { id: 10, name: "رتب الكلمة", icon: "🔠", questions: [
-                {points:200, q:"رتب (د - أ - س - إ) لحيوان مفترس؟", a:"أسد"},
-                {points:200, q:"رتب (ر - ا - ق - ه) لعاصمة عربية؟", a:"القاهرة"},
-                {points:400, q:"رتب (ب - خ - ر - ت - ي) لفاكهة؟", a:"بطيخ"},
-                {points:400, q:"رتب (ق - ل - م) لجماد؟", a:"قلم"},
-                {points:600, q:"رتب (ب - ذ - ه) لعنصر معدني ثمين؟", a:"ذهب"},
-                {points:600, q:"رتب (ر - م - ق - ت) لدولة خليجية؟", a:"قطر"}
+            { id: 10, name: "أمثال شعبية", icon: "📜", questions: [
+                {points:200, q:"أكمل المثل الشعبي: 'إسأل مجرب ولا تسأل...'؟", a:"طبيب"},
+                {points:200, q:"أكمل المثل: 'الباب اللي يجيك منه ريح...'؟", a:"سده واستريح"},
+                {points:400, q:"أكمل المثل: 'ما طير طار وارتفع...'؟", a:"إلا كما طار وقع"},
+                {points:400, q:"أكمل المثل: 'على قد لحافك...'؟", a:"مد رجليك"},
+                {points:600, q:"أكمل المثل: 'اللي بيته من زجاج...'؟", a:"ما يحدف الناس بالطوب"},
+                {points:600, q:"أكمل المثل: 'من طول الغيبة...'؟", a:"جاب الغنائم"}
             ]},
-            { id: 11, name: "عواصم العالم", icon: "🌍", questions: [
-                {points:200, q:"عاصمة سلطنة عمان؟", a:"مسقط"},
-                {points:200, q:"عاصمة أستراليا؟", a:"كانبيرا"},
-                {points:400, q:"عاصمة كندا؟", a:"أوتاوا"},
-                {points:400, q:"عاصمة اليابان؟", a:"طوكيو"},
-                {points:600, q:"عاصمة الأرجنتين؟", a:"بوينس آيرس"},
-                {points:600, q:"عاصمة النمسا؟", a:"فيينا"}
+            { id: 11, name: "حيوانات غريبة", icon: "🐅", questions: [
+                {points:200, q:"ما هو الحيوان البحري الذي يملك ثلاثة قلوب ودمه لونه أزرق؟", a:"الأخطبوط"},
+                {points:200, q:"ما هو الطائر البحري القطبي الذي لا يفلح في الطيران لكنه سباح ماهر ويشبه المرتدين بدلات رسمية؟", a:"البطريق"},
+                {points:400, q:"ما هو الحيوان الثديي الوحيد الذي يملك القدرة الكاملة على الطيران؟", a:"الخفاش (الوطواط)"},
+                {points:400, q:"ما هو الحيوان الأبطأ حركة على سطح الأرض بشكل دائم؟", a:"الكسلان (Sloth)"},
+                {points:600, q:"ما هو الحيوان الذي ينام وعين واحدة مفتوحة والأخرى مغلقة لحراسة نفسه؟", a:"الدلفين (أو الحوت)"},
+                {points:600, q:"ما هو الحيوان الذي يستطيع تجديد أطرافه المقطوعة بالكامل إذا فقدها؟", a:"السمندل (Salamander)"}
             ]},
-            { id: 12, name: "شعارات", icon: "🛡️", questions: [
-                {points:200, q:"شعار سيارات بـ 4 حلقات متداخلة؟", a:"أودي"},
-                {points:200, q:"شركة تقنية شعارها تفاحة مقضومة؟", a:"أبل"},
-                {points:400, q:"شعار سيارات حصان جامح أصفر؟", a:"فيراري"},
-                {points:400, q:"مطعم شعاره حرف M ذهبي؟", a:"ماكدونالدز"},
-                {points:600, q:"الشعار الموجود على علم لبنان؟", a:"شجرة الأرز"},
-                {points:600, q:"الشعار البصري لشركة نايكي؟", a:"علامة الصح المائل"}
+            { id: 12, name: "اخترعات واكتشافات", icon: "💡", questions: [
+                {points:200, q:"من هو العالم الذي اكتشف الجاذبية الأرضية بعد سقوط تفاحة على رأسه؟", a:"إسحاق نيوتن"},
+                {points:200, q:"من هو المخترع الشهير الذي اخترع الهاتف المحمول أو التليفون التقليدي؟", a:"ألكسندر غراهام بيل"},
+                {points:400, q:"من هي العالمة الشهيرة التي اكتشفت عنصري الراديوم والبولونيوم ونالت جائزة نوبل مرتين؟", a:"ماري كوري"},
+                {points:400, q:"من هو المخترع الألماني الذي اخترع آلة الطباعة الحديثة؟", a:"يوهان غوتنبرغ"},
+                {points:600, q:"من هو مكتشف البنسلين (أول مضاد حيوي في التاريخ) بالصدفة؟", a:"ألكسندر فليمنغ"},
+                {points:600, q:"من هو صاحب نظرية التطور أو مخترع الطائرة الأبيلية؟ (اخترع طائرة الأختين رايت)", a:"الأخوان رايت"}
             ]},
-            { id: 13, name: "جماد وحيوان", icon: "🦁", questions: [
-                {points:200, q:"جماد بحرف الميم للإضاءة بالسقف؟", a:"مصباح"},
-                {points:200, q:"حيوان مائي ذكي وينقذ البشر؟", a:"الدلفين"},
-                {points:400, q:"جماد بحرف الحاء للوقاية من الشمس؟", a:"قبعة"},
-                {points:400, q:"حيوان سفينة الصحراء؟", a:"الجمل"},
-                {points:600, q:"جماد لقص القماش والورق؟", a:"مقص"},
-                {points:600, q:"الطائر الوحيد الذي يطير للخلف؟", a:"طائر الطنان"}
+            { id: 13, name: "حلويات عالمية", icon: "🍰", questions: [
+                {points:200, q:"ما هي الحلوى الإيطالية الشهيرة المكونة من طبقات البسكويت المغموس بالقهوة والجبن الكريمي؟", a:"تيراميسو (Tiramisu)"},
+                {points:200, q:"ما هي الحلوى الفرنسية الشهيرة الرقيقة جداً التي تُقدم مطوية مع الشوكولاتة أو الفواكه؟", a:"الكريب (Crepe)"},
+                {points:400, q:"ما هي الحلوى الأمريكية الشهيرة المكونة من عجينة دائرية مقلية وبها ثقب بالوسط مع سكر ملون؟", a:"الدونات (Donut)"},
+                {points:400, q:"ما هي الحلوى التركية الباردة والشهيرة جداً والمصنوعة من الحليب والقطر والشعيرية (تُشبه المهلبية)؟", a:"التريليتشيه (Trileçe)"},
+                {points:600, q:"ما هي الحلوى اليابانية التقليدية المصنوعة من عجينة الأرز اللزجة والمحشية بمعجون الفاصوليا الحمراء؟", a:"الموتشي (Mochi)"},
+                {points:600, q:"ما هي الحلوى الإسبانية المقرمشة المقلية على شكل أصابع طويلة وتُغمس بالشوكولاتة الساخنة؟", a:"التشورو (Churros)"}
             ]},
-            { id: 14, name: "شخصيات", icon: "👤", questions: [
-                {points:200, q:"صاحب نظرية النسبية؟", a:"أينشتاين"},
-                {points:200, q:"مخترع المصباح الكهربائي؟", a:"توماس إديسون"},
-                {points:400, q:"الرحالة صاحب تحفة النظار؟", a:"ابن بطوطة"},
-                {points:400, q:"قائد معركة عين جالوت؟", a:"سيف الدين قطز"},
-                {points:600, q:"أديب مصري حاز نوبل 1988؟", a:"نجيب محفوظ"},
-                {points:600, q:"الرسام الإيطالي للموناليزا؟", a:"ليوناردو دافنشي"}
+            { id: 14, name: "رياضات أولمبية", icon: "🏅", questions: [
+                {points:200, q:"ما هي الرياضة الأساسية في الألعاب الأولمبية التي تتضمن سباقات السرعة والوثب العالي؟", a:"ألعاب القوى (الجري والسباقات)"},
+                {points:200, q:"ما هو لون الحلقات الخمس المتباينة المرسومة على علم الألعاب الأولمبية؟", a:"أزرق، أسود، أحمر، أصفر، أخضر"},
+                {points:400, q:"ما هي الرياضة القتالية اليابانية التي تعتمد على الرمي والتشبث بالبدلة دون لكمات؟", a:"الجودو (Judo)"},
+                {points:400, q:"ما هي الرياضة التي تقام في حوض سباحة كبير وتتضمن رمي الكرة باليد داخل المرمى؟", a:"كرة الماء (Water Polo)"},
+                {points:600, q:"ما هي المدينة التي استضافت دورة الألعاب الأولمبية الصيفية لعام 2024؟", a:"باريس (فرنسا)"},
+                {points:600, q:"ما هي الرياضة الاستعراضية التي تم إضافتها حديثاً للأولمبياد وتعتمد على الرقص الحر على الإيقاع؟", a:"البريك دانس (Breakdance)"}
             ]},
-            { id: 15, name: "باب الحارة", icon: "🏘️", questions: [
-                {points:200, q:"لقب شخصية عصام؟", a:"عصام الحلاق"},
-                {points:200, q:"زعيم حارة الضبع بالجزء الأول؟", a:"أبو شهاب"},
-                {points:400, q:"الحارة المنافسة لحارة الضبع؟", a:"حارة أبو النار"},
-                {points:400, q:"قائل جملة حيف يا زلمة؟", a:"أبو شهاب"},
-                {points:600, q:"الصيدلي الذي تزوج مأمون بيض البقر؟", a:"العتريس"},
-                {points:600, q:"أي جزء ظهر أبو جودت كرئيس مخفر؟", a:"الجزء الأول"}
+            { id: 15, name: "بحار ومحيطات", icon: "🌊", questions: [
+                {points:200, q:"ما هو المحيط الأكبر مساحة وعمقا على وجه الأرض؟", a:"المحيط الهادي"},
+                {points:200, q:"ما هو البحر الميت الواقع بين الأردن وفلسطين ويتميز بملوحته الفائقة؟", a:"البحر الميت"},
+                {points:400, q:"ما هو البحر الذي يفصل بين شبه الجزيرة العربية وقارة إفريقيا؟", a:"البحر الأحمر"},
+                {points:400, q:"ما هو المحيط الذي يقع حول القطب الجنوبي المتجمد؟", a:"المحيط المتجمد الجنوبي"},
+                {points:600, q:"ما هو أضيق مضيق بحري في العالم يصل بين بحري مرمرة الأسود؟ (أو مضيق جبل طارق)", a:"مضيق البوسفور / أو جبل طارق"},
+                {points:600, q:"ما هو اسم الخندق العميق جداً في قاع المحيط الهادي ويُعد أعمق نقطة على الأرض؟", a:"خندق ماريانا"}
             ]},
-            { id: 16, name: "مسلسلات شامية", icon: "🏮", questions: [
-                {points:200, q:"مسلسل حارة الشاغور وبسام كوسا؟", a:"ليالي الصالحية"},
-                {points:200, q: "شخصية المعترم أو المعلم عمر؟", a:"باسل خياط"},
-                {points:400, q:"مسلسل الخوالي لسلوم حداد؟", a:"الخوالي"},
-                {points:400, q:"مسلسل شامية عائلات أبو العز؟", a:"حارة القبة"},
-                {points:600, q:"المرجع الأساسي للدراما الشامية؟", a:"أيام شامية"},
-                {points:600, q:"زوجة أبو عصام الأولى؟", a:"سعاد"}
+            { id: 16, name: "أساطير قديمة", icon: "⚡", questions: [
+                {points:200, q:"من هو إله الرعد والبرق في الأساطير الإسكندنافية القديمة صاحب المطرقة الشهيرة؟", a:"ثور (Thor)"},
+                {points:200, q:"من هو كبير الآلهة في الأساطير الإغريقية القديمة (اليونانية)؟", a:"زيوس (Zeus)"},
+                {points:400, q:"ما اسم المخلوق الأسطوري اليوناني الذي يملك شعرًا من الأناناس أو الثعابين وتحول كل من ينظر لعينيه لحجر؟", a:"ميدوسا (Medusa)"},
+                {points:400, q:"ما اسم الحصان الأسطوري المجنح الأبيض في الأساطير الإغريقية؟", a:"بيغاسوس (Pegasus)"},
+                {points:600, q:"ما اسم الطائر الأسطوري الناري الذي يولد من رماده وينبعث للحياة من جديد؟", a:"العنقاء (Phoenix)"},
+                {points:600, q:"ما اسم المتاهة المرعبة التي سُجن فيها المخلوق نصف الإنسان ونصف الثور (المينوتور)؟", a:"متاهة مينوس"}
             ]},
-            { id: 17, name: "كرتون زمان", icon: "🧸", questions: [
-                {points:200, q:"المخلوق الطائر المرافق لسندباد؟", a:"ياسمينة"},
-                {points:200, q:"فتاة جبال الألب الصغيرة؟", a:"هايدي"},
-                {points:400, q:"مدينة عدنان ولينا؟", a:"قلعة المصنع"},
-                {points:400, q:"الفريق المنافس لباسّام؟", a:"فريق المجد"},
-                {points:600, q:"المحقق الصغير المقلص؟", a:"كونان"},
-                {points:600, q:"الكلب المرافق لسالي؟", a:"سيزر"}
+            { id: 17, name: "مهن وحرف", icon: "🛠️", questions: [
+                {points:200, q:"ما هو اسم المهني أو الحرفي الذي يصنع الأدوات والأثاث من الخشب؟", a:"النجار"},
+                {points:200, q:"ما هو اسم الحرفي الذي يصلي ويصلح الأجزاء المعدنية والحديدية بالنار والعدة؟", a:"الحداد"},
+                {points:400, q:"ما هو اسم الشخص المسؤول عن صيانة التوصيلات الكهربائية وشبكات المنازل؟", a:"فني كهرباء (كهربائي)"},
+                {points:400, q:"ما هو اسم الصانع الذي يبني الجدران والطوب والأسمنت في المنازل؟", a:"البنا (المقاول / البناء)"},
+                {points:600, q:"ما هو اسم الشخص المحترف الذي يقوم بخياطة وتصميم الأزياء والملابس؟", a:"الخياط (الترزي)"},
+                {points:600, q:"ما هو اسم الحرفي الذي يصنع الأواني والأشكال الفخارية من الطين المخبوز؟", a:"الفخاري (صانع الفخار)"}
             ]},
-            { id: 18, name: "رسوم حديثة", icon: "✨", questions: [
-                {points:200, q:"الأميرة ذات القوى الجليدية؟", a:"إلسا (Frozen)"},
-                {points:200, q:"السيارة الحمراء بطل كارتون Cars؟", a:"برق مكوين"},
-                {points:400, q:"المشاعر الخمسة داخل رأس رايلي؟", a:"Inside Out"},
-                {points:400, q: "السمكة خفيفة الذاكرة بنيمو؟", a:"دوري"},
-                {points:600, q:"عالم سحري لعائلة ماديراغي؟", a:"إنكانتو"},
-                {points:600, q:"أنمي صائد الشياطين تانجيرو؟", a:"ديمون سلاير"}
+            { id: 18, name: "عالم الطيور", icon: "🦅", questions: [
+                {points:200, q:"ما هو الطائر الأكبر حجماً في العالم ولا يطير بل يجري بسرعة فائقة؟", a:"النعامة"},
+                {points:200, q:"ما هو الطائر المعروف بذكائه الخارق وتقليده لأصوات البشر؟", a:"الببغاء"},
+                {points:400, q:"ما هو الطائر الوطني للولايات المتحدة الأمريكية ويُعتبر من الجوارح القوية؟", a:"العقاب الأَصْلَع (النسور الأمريكية)"},
+                {points:400, q:"ما هو الطائر الذي يُعتبر رمزاً للسلام العالمي في الثقافات؟", a:"حمامة السلام (الحمام الأبيض)"},
+                {points:600, q:"ما هو الطائر الذي يبني أعشاشاً هندسية معقدة ومتدلية من الأشجار (طائر النساج)؟", a:"طائر النساج (Weaver bird)"},
+                {points:600, q:"ما هو أصغر طائر في العالم ويستطيع رفرفة جناحيه بسرعة جنونية؟", a:"طائر الطنان (Hummingbird)"}
             ]},
-            { id: 19, name: "التاريخ", icon: "📜", questions: [
-                {points:200, q:"عام غزوة بدر الكبرى؟", a:"السنة الثانية للهجرة"},
-                {points:200, q:"الدولة التي قادت الخلافة العثمانية؟", a:"تركيا / الدولة العثمانية"},
-                {points:400, q:"فاتح القسطنطينية 1453؟", a:"محمد الفاتح"},
-                {points:400, q: "عام انتهاء الحرب العالمية الثانية؟", a:"1945"},
-                {points:600, q:"معركة نهاوند ضد من؟", a:"الفرس (الساسانيون)"},
-                {points:600, q:"مؤسس الدولة الأموية بالشام؟", a:"معاوية بن أبي سفيان"}
+            { id: 19, name: "ألوان ومعاني", icon: "🎨", questions: [
+                {points:200, q:"ما هو اللون الناتج من مزج اللونين الأزرق والأصفر معاً في الرسم؟", a:"اللون الأخضر"},
+                {points:200, q:"ما هي الألوان الثلاثة الأساسية في نظرية الألوان الضوئية (RGB)؟", a:"الأحمر، الأخضر، الأزرق"},
+                {points:400, q:"ما هو اللون الذي يرمز عادة إلى السلام والهدوء والنقاء؟", a:"اللون الأبيض"},
+                {points:400, q:"ما هو اللون الناتج من دمج اللونين الأحمر والأصفر؟", a:"اللون البرتقالي"},
+                {points:600, q:"ما هو اللون الذي يوحي بالحزن أو الكآبة في بعض الثقافات الغربية ويسمى اللون الملكي قديماً؟", a:"البنفسجي (أو الأسود للحزن)"},
+                {points:600, q:"ما هي الألوان المُكملة للون الأحمر في عجلة الألوان؟", a:"اللون الأخضر"}
             ]},
-            { id: 20, name: "الرياضيات", icon: "🔢", questions: [
-                {points:200, q:"ناتج ضرب 7 × 8؟", a:"56"},
-                {points:200, q:"العدد الأولي الزوجي الوحيد؟", a:"2"},
-                {points:400, q:"مساحة مربع طول ضلعه 9؟", a:"81"},
-                {points:400, q: "مجموع زوايا المثلث الداخلية؟", a:"180 درجة"},
-                {points:600, q:"جذر 144 مضافاً إليه 10؟", a:"22"},
-                {points:600, q:"نظرية المثلث القائم؟", a:"فيثاغورس"}
+            { id: 20, name: "أشهر المتاحف", icon: "🖼️", questions: [
+                {points:200, q:"أين يقع متحف اللوفر الشهير الذي يضم لوحة الموناليزا؟", a:"في مدينة باريس (فرنسا)"},
+                {points:200, q:"ما هو المتحف الضخم الشهير في لندن الذي يضم الآثار المصرية واليونانية القديمة؟", a:"المتحف البريطاني"},
+                {points:400, q:"أين يقع متحف المترو للفنون الشهير عالمياً؟", a:"في مدينة نيويورك (الولايات المتحدة)"},
+                {points:400, q:"ما هو المتحف المقرر افتتاحه قرب الأهرامات في مصر ويُعد الأكبر للآثار في العالم؟", a:"المتحف المصري الكبير (GEM)"},
+                {points:600, q:"أين يقع متحف غوغنهايم الشهير بتصميمه المعماري الغريب بإسبانيا؟", a:"في مدينة بلباو"},
+                {points:600, q:"أين يقع متحف الفن الحديث (MoMA) الشهير؟", a:"نيويورك"}
             ]},
-            { id: 21, name: "العلوم والفيزياء", icon: "🔬", questions: [
-                {points:200, q:"رمز عنصر الذهب بالكيمياء؟", a:"Au"},
-                {points:200, q:"الغز الأكثر وفرة بالجو؟", a:"النييتروجين"},
-                {points:400, q:"وحدة قياس القوة؟", a:"النيوتن"},
-                {points:400, q:"سرعة الضوء بالفراغ؟", a:"300 ألف كم/ث"},
-                {points:600, q:"الرقم الهيدروجيني للماء النقي؟", a:"7"},
-                {points:600, q:"العنصر الأساسي بالعضويات؟", a:"الكربون"}
+            { id: 21, name: "أشهر الجسور", icon: "🌉", questions: [
+                {points:200, q:"ما اسم جسر المعلق الشهير لونه برتقالي في مدينة سان فرانسيسكو الأمريكية؟", a:"جسر البوابة الذهبية (Golden Gate)"},
+                {points:200, q:"ما اسم الجسر المتحرك الشهير في العاصمة البريطانية لندن بجوار برج لندن؟", a:"جسر البرج (Tower Bridge)"},
+                {points:400, q:"ما اسم الجسر القديم الشهير في مدينة فونس بروان بتركيا أو جسر البوسفور الذي يربط قارتين؟", a:"جسر البوسفور (أو جسر الشهداء)"},
+                {points:400, q:"ما هو أطول جسر بحري في العالم يربط بين هونغ كونغ وماكاو والصين؟", a:"جسر هونغ كونغ - تشوهاي - ماكاو"},
+                {points:600, q:"ما اسم الجسر التاريخي الشهير في مدينة موستار بالبوسنة والهرسك؟", a:"الجسر القديم (Stari Most)"},
+                {points:600, q:"أين يقع جسر بروكلين التاريخي الشهير؟", a:"نيويورك (يربط مانهاتن ببروكلين)"}
             ]},
-            { id: 22, name: "الجغرافيا", icon: "🗺️", questions: [
-                {points:200, q:"عاصمة أستراليا؟", a:"كانبيرا"},
-                {points:200, q:"أكبر بحر مغلق بالعالم؟", a:"بحر قزوين"},
-                {points:400, q:"دولة عاصمتها كيتو؟", a:"الإكوادور"},
-                {points:400, q:"أطول نهر بالعالم؟", a:"نهر النيل"},
-                {points:600, q:"مضيق يفصل إفريقيا عن أوروبا؟", a:"جبل طارق"},
-                {points:600, q:"أصغر دولة بالعالم مساحة؟", a:"الفاتيكان"}
+            { id: 22, name: "أشهر الساعات", icon: "⏰", questions: [
+                {points:200, q:"ما هو اسم برج الساعة الشهير والرمز الأبرز في العاصمة البريطانية لندن؟", a:"ساعة بيغ بن (Big Ben)"},
+                {points:200, q:"أين تقع ساعة الأرجوان أو ساعة الملك عبد الله الكبرى في المملكة العربية السعودية؟", a:"في مكة المكرمة (برج الساعة)"},
+                {points:400, q:"ما هي الدولة المشهورة عالمياً بصناعة الساعات اليدوية الدقيقة والفاخرة جداً؟", a:"سويسرا"},
+                {points:400, q:"ما اسم الساعة الفلكية التاريخية الشهيرة الموجودة في ساحة مدينة براغ بجمهورية التشيك؟", a:"ساعة براغ الفلكية"},
+                {points:600, q:"ما هو اسم العلامة التجارية الفاخرة للساعات التي أسسها هانس ويلسدورف وصنع أول ساعة مقاومة للماء؟", a:"رولكس (Rolex)"},
+                {points:600, q:"ما اسم الساعة الرقمية الشهيرة التي صنعتها شركة كاسيو واشتهرت بتصميمها الرجعي (Retro)؟", a:"كاسيو F-91W"}
             ]},
-            { id: 23, name: "مسلسلات خليجية", icon: "📺", questions: [
-                {points:200, q:"مسلسل درب الزلق الكويتي؟", a:"عبد الحسين عبد الرضا"},
-                {points:200, q:"مسلسل طاش ما طاش السعودي؟", a:"ناصر القصبي وعبد الله السدحان"},
-                {points:400, q: "مسلسل خالتي قماشة؟", a:"حياة الفهد وسعاد عبد الله"},
-                {points:400, q:"مسلسل فرجان ليل التراثي؟", a:"مسلسل تراثي خليجي"},
-                {points:600, q:"مسلسل أم هارون الكويتي؟", a:"حياة الفهد"},
-                {points:600, q:"مسلسل العاصوف السعودي؟", a:"ناصر القصبي"}
+            { id: 23, name: "أمراض وعلاجات", icon: "💊", questions: [
+                {points:200, q:"ما هو اسم الفيروس الشهير الذي أصاب العالم عام 2020 وتسبب بجائحة عالمية؟", a:"فيروس كورونا (كوفيد-19)"},
+                {points:200, q:"ما هو اسم المضاد الحيوي الأول الذي اكتشفه ألكسندر فليمنغ لعلاج الالتهابات البكتيرية؟", a:"البنسلين (Penicillin)"},
+                {points:400, q:"ما هو المرض الذي يسببه نقص فيتامين C ويؤدي لضعف اللثة (كان يصيب البحارة قديماً)؟", a:"مرض الإسقربوط"},
+                {points:400, q:"ما هو اسم العضو البشري المسؤول عن تنقية الدم وإצהار السموم في الجسم؟", a:"الكبد (والكليتان)"},
+                {points:600, q:"ما هو اسم الفيتامين الذي ينتجه جسم الإنسان بشكل طبيعي عند التعرض لأشعة الشمس؟", a:"فيتامين د (Vitamin D)"},
+                {points:600, q:"ما هو المرض الوراثي الذي يتسبب بعدم قدرة الدم على التجلط بشكل طبيعي؟", a:"مرض الناعور (الهيموفيليا)"}
             ]},
-            { id: 24, name: "أفلام أجنبية", icon: "🎥", questions: [
-                {points:200, q:"سلسلة هاري بوتر وسحر هوجوورتس؟", a:"هاري بوتر"},
-                {points:200, q:"أبطال مارفل الخارقون Avengers؟", a:"المنتقمون"},
-                {points:400, q:"فيلم Inception ونولان والأحلام؟", a:"إنسبشن"},
-                {points:400, q:"سلسلة Fast & Furious للسيارات؟", a:"فاست آند فيوريوس"},
-                {points:600, q:"فيلم The Shawshank Redemption؟", a:"الهروب من شاوشانك"},
-                {points:600, q:"سلسلة Star Wars وفضاء؟", a:"حرب النجوم"}
+            { id: 24, name: "أدوات مطبخ", icon: "🍳", questions: [
+                {points:200, q:"ما هي الأداة الحادة المصنوعة من المعدن وتُستخدم لتقطيع الخضار واللحوم في المطبخ؟", a:"السكين"},
+                {points:200, q:"ما هي الأداة العميق أو المقلاة ذات المقبض الطويل المستخدمة لقلي الأطعمة بالزيت؟", a:"المقلاة (الطاوة)"},
+                {points:400, q:"ما هو الجهاز الكهربائي المنزلي الذي يُستخدم لطحن الأطعمة وصنع العصائر الطازجة؟", a:"الخلاط الكهربائي"},
+                {points:400, q:"ما هي الأداة الشبيهة بالشبكة المصنوعة من السلك وتُستخدم لتصفية المكرونة أو السوائل؟", a:"المصفاة (المنخل)"},
+                {points:600, q:"ما اسم الجهاز الحراري الكبير في المطبخ المُستخدم لخبز المعجنات وشواء اللحوم؟", a:"الفرن"},
+                {points:600, q:"ما هي الأداة المعدنية الصغيرة ذات الأسنان المُستخدمة لتناول الأطعمة مثل السلطة والمكرونة؟", a:"الشوكة"}
             ]},
-            { id: 25, name: "كأس العالم", icon: "🏆", questions: [
-                {points:200, q:"أكثر منتخب توج بمونديال القدم؟", a:"البرازيل"},
-                {points:200, q:"الدولة المستضيفة لمونديال 2022؟", a:"قطر"},
-                {points:400, q:"قائد الأرجنتين بمونديال 2022؟", a:"ليونيل ميسي"},
-                {points:400, q:"المنتخب العربي بنصف نهائي 2022؟", a:"المغرب"},
-                {points:600, q:"الهداف التاريخي لكأس العالم؟", a:"ميروسلاف كلوزه"},
-                {points:600, q:"مضيف أول كأس عالم 1930؟", a:"أوروغواي"}
+            { id: 25, name: "أشهر الأنهار", icon: "💧", questions: [
+                {points:200, q:"ما هو النهر الأطول في قارة إفريقيا وفي العالم أجمع؟", a:"نهر النيل"},
+                {points:200, q:"ما هو النهر العظيم الذي يمر عبر قارة أوروبا ويصب في بحر الشمال (أو نهر الدانوب)؟", a:"نهر الراين / أو الدانوب"},
+                {points:400, q:"ما هو النهر الأكبر في العالم من حيث حجم المياه وسعة التدفق ويقع في أمريكا الجنوبية؟", a:"نهر الأمازون"},
+                {points:400, q:"ما هو النهر الشهير في العراق والذي يمتد جنباً إلى جنب مع نهر دجلة؟", a:"نهر الفرات"},
+                {points:600, q:"ما هو النهر المقدّس لدى الهندوس في الهند ويغتسلون بمياهه؟", a:"نهر الغانج"},
+                {points:600, q:"ما هو النهر التاريخي الذي يمر عبر العاصمة الفرنسية باريس؟", a:"نهر السين (Seine)"}
             ]},
-            { id: 26, name: "منوعات وثقافة", icon: "💡", questions: [
-                {points:200, q:"عدد عظام الإنسان البالغ؟", a:"206 عظمة"},
-                {points:200, q:"أسرع حيوان بري بالعالم؟", a:"الفهد (الشيتا)"},
-                {points:400, q:"الكوكب المعروف بالأحمر؟", a:"المريخ"},
-                {points:400, q:"عاصمة كندا؟", a:"أوتاوا"},
-                {points:600, q:"العنصر الأكثر وفراً بقشرة الأرض؟", a:"الأكسجين"},
-                {points:600, q:"عام هبوط الإنسان على القمر؟", a:"1969"}
+            { id: 26, name: "أزياء تقليدية", icon: "👘", questions: [
+                {points:200, q:"ما هو اسم اللباس التقليدي الياباني الشهير المصنوع من الحرير والمزين بنقوش زاهية؟", a:"الكيمونو (Kimono)"},
+                {points:200, q:"ما هو اللباس التقليدي الهندي الشهير المكون من قطعة قماش طويلة تُلف حول الجسم؟", a:"الساري (Sari)"},
+                {points:400, q:"ما هو اسم الثوب التقليدي الاسكتلندي للرجال والمصنوع من قماش المربعات (التارتان)؟", a:"التنورة الاسكتلندية (Kilt)"},
+                {points:400, q:"ما هو اسم القبعة التقليدية المخروطية الشكل المشهورة في دول شرق آسيا (فيتنام والصين)؟", a:"قبعة النون (القبعة المخروطية)"},
+                {points:600, q:"ما هو اسم المعطف التقليدي الشتوي الطويل المصنوع من الصوف في دول أمريكا الجنوبية (مثل الأرجنتين وبيرو)؟", a:"البونشو (Poncho)"},
+                {points:600, q:"ما هو اسم غطاء الرأس التقليدي للرجال في دول الخليج العربي (ويكون أبيض أو أحمر)؟", a:"الغترة / الشماغ والعقال"}
             ]},
-            { id: 27, name: "ألغاز ذكاء", icon: "🧩", questions: [
-                {points:200, q:"شيء يسير بلا رجلين ويدخل للأذنين؟", a:"الصوت"},
-                {points:200, q:"بيت ليس فيه باب ولا نافذة؟", a:"بيت الشعر"},
-                {points:400, q:"شاعر المعلقات الملقب بالملك الضليل؟", a:"امرؤ القيس"},
-                {points:400, q:"صوت الحصان يُسمى؟", a:"صهيل"},
-                {points:600, q:"بحر يفصل آسيا عن إفريقيا بلونه؟", a:"البحر الأحمر"},
-                {points:600, q:"معدن نفيس يُسمى الذهب الأبيض؟", a:"البلاتين"}
+            { id: 27, name: "لغات العالم", icon: "🗣️", questions: [
+                {points:200, q:"ما هي اللغة الأكثر تحدثاً في العالم من حيث عدد الناطقين الأصليين؟", a:"اللغة الصينية (المندرين)"},
+                {points:200, q:"ما هي لغة العالم الرسمية الأكثر انتشاراً في السفر والأعمال والتكنولوجيا؟", a:"اللغة الإنجليزية"},
+                {points:400, q:"كم عدد الحروف الأبجدية في اللغة العربية؟", a:"28 حرفاً"},
+                {points:400, q:"ما هي اللغة الرسمية المتحدثة في دولة البرازيل (ليست الإسبانية)؟", a:"اللغة البرتغالية"},
+                {points:600, q:"ما هي أقدم لغة مكتوبة في تاريخ البشرية ظهرت في بلاد الرافدين (العراق القديم)؟", a:"اللغة السومرية (الكتابة المسمارية)"},
+                {points:600, q:"ما هي عائلة اللغات التي تنتمي إليها اللغة العربية والعبرية؟", a:"اللغات السامية"}
             ]},
-            { id: 28, name: "تكنولوجيا", icon: "💻", questions: [
-                {points:200, q:"مؤسس شركة مايكروسوفت؟", a:"بيل غيتس"},
-                {points:200, q:"مؤسس شركة أبل؟", a:"ستيف جوبز"},
-                {points:400, q:"ما هو نظام التشغيل لهواتف أيفون؟", a:"iOS"},
-                {points:400, q:"موقع الفيديوهات الأشهر بالعالم؟", a:"يوتيوب"},
-                {points:600, q:"ماذا تعني اختصار كلمة Wi-Fi؟", a:"تفضيل لاسلكي (تجاوز الإشارة)"},
-                {points:600, q:"لغة برمجة أساسية للويب وتفاعله؟", a:"جافاسكريبت"}
+            { id: 28, name: "أجهزة إلكترونية", icon: "💻", questions: [
+                {points:200, q:"ما هو اسم الشركة العالمية التي صنعت حواسيب ماكنتوش وهواتف آيفون؟", a:"أبل (Apple)"},
+                {points:200, q:"ما هو الجهاز الصغير المحمول الذي يُستخدم لتصفح الإنترنت والاتصال اللاسلكي (Wi-Fi)؟", a:"الهاتف الذكي (Smartphone)"},
+                {points:400, q:"ما هو اسم النظام التشغيل المفتوح المصدر لهواتف أندرويد وتديره شركة غوجل؟", a:"أندرويد (Android)"},
+                {points:400, q:"ما هو اسم الجهاز المكتبي أو المحمول المُستخدم لمعالجة البيانات والنصوص والبرمجة؟", a:"الكمبيوتر (الحاسوب)"},
+                {points:600, q:"ما هي القطعة الإلكترونية الأساسية داخل الحاسوب التي تُسمى 'عقل الكمبيوتر المدبر'؟", a:"المعالج (CPU / وحدة التتمة المركزية)"},
+                {points:600, q:"ما هو اسم القرص الصلب فائق السرعة الحديث المُستخدم لتخزين الملفات في الأجهزة؟", a:"قرص SSD (Solid State Drive)"}
             ]},
-            { id: 29, name: "عطور عالمية", icon: "🌸", questions: [
-                {points:200, q:"مكون أساسي شهير في عطور الشرق الأوسط؟", a:"العود والمسك"},
-                {points:200, q:"مدينة فرنسية تُعتبر عاصمة العطور؟", a:"غراس (Grasse)"},
-                {points:400, q:"أشهر زهرة مستخدمة في العطور الكلاسيكية؟", a:"الياسمين والورد الجوري"},
-                {points:400, q:"ما هو الزيت العطري الثابت المستخدم بالقواعد؟", a:"العنبر"},
-                {points:600, q:"مادة عطرية غקالية جداً تُستخرج من الحيتان؟", a:"العنبر الخام (عنبر الحوت)"},
-                {points:600, q:"نوع عطور مركز جداً وقوي الثبات؟", a:"البرفان (Parfum)"}
+            { id: 29, name: "أشهر الأدباء", icon: "✍️", questions: [
+                {points:200, q:"من هو الكاتب الإنجليزي العبقري صاحب مسرحيات 'روميو وجولييت' و'هاملت'؟", a:"ويليام شكسبير"},
+                {points:200, q:"من هو الأديب المصري الكبير صاحب ثلاثية القاهرة (بين القصرين، قصر الشوق...)؟", a:"نجيب محفوظ"},
+                {points:400, q:"من هو الكاتب الفرنسي صاحب رواية 'البؤساء' الشهيرة؟", a:"فكتور هوغو"},
+                {points:400, q:"من هو الشاعر والكاتب اللبناني الأمريكي صاحب كتاب 'النبي' الشهير؟", a:"جبران خليل جبران"},
+                {points:600, q:"من هو الروائي الروسي العظيم صاحب روايتي 'الحرب والسلم' و'آنا كارنينا'؟", a:"ليو تولستوي"},
+                {points:600, q:"من هي الروائية الإنجليزية الشهيرة مؤلفة روايات الجريمة والتحقق مثل 'جريمة في قطار الشرق السريع'؟", a:"أغاثا كريستي"}
             ]},
-            { id: 30, name: "سيارات", icon: "🏎️", questions: [
-                {points:200, q:"الشركة المصنعة لسيارة كورولا وكامري؟", a:"تويوتا"},
-                {points:200, q:"سيارة فاخرة بريطانية شعارها حرف B طائر؟", a:"بنتلي"},
-                {points:400, q:"سيارة كهربائية شهيرة لإيلون ماسك؟", a:"تيسلا"},
-                {points:400, q:"سيارة دفع رباعي يابانية شهيرة بـ لاندكروزر؟", a:"تويوتا"},
-                {points:600, q:"شركة ألمانية فاخرة تشتهر بالفئة السابعة؟", a:"بي إم دبليو (BMW)"},
-                {points:600, q:"أسرع سيارة إنتاج تجاري بالعالم تاريخياً؟", a:"بوغاتي (Bugatti)"}
+            { id: 30, name: "طاقة ومصادر", icon: "⚡", questions: [
+                {points:200, q:"ما هو المصدر الأساسي والمهيمن للطاقة على كوكب الأرض؟", a:"الشمس (الطاقة الشمسية)"},
+                {points:200, q:"ما هو الوقود الأحفوري السائل الأسود الذي يُعد عصب الاقتصاد العالمي؟", a:"النفط (البترول)"},
+                {points:400, q:"ما هي الطاقة النظيفة التي تُستولد من حركة الرياح الهائلة عبر المراوح الضخمة؟", a:"طاقة الرياح"},
+                {points:400, q:"ما هي الطاقة المتولدة من حركة المياه الجارية والسدود المائية؟", a:"الطاقة الكهرومائية (المائية)"},
+                {points:600, q:"ما اسم الطاقة المتولدة من باطن الأرض الساخن (الينابيع البركانية)؟", a:"الطاقة الحرارية الأرضية (Geothermal)"},
+                {points:600, q:"ما هي الطاقة الناتجة عن انشطار ذوات العناصر الثقيلة مثل اليورانيوم؟", a:"الطاقة النووية"}
+            ]},
+            // وتستمر التصنيفات الإضافية لتكتمل الـ 60 تصنيفاً المنوعة والجديدة كلياً...
+            { id: 31, name: "عجائب الدنيا", icon: "🗿", questions: [
+                {points:200, q:"ما هو المعلم الصيني العظيم الذي يُرى من الفضاء الخارجي؟", a:"سور الصين العظيم"},
+                {points:200, q:"أين تقع مدينة البتراء الأثرية المنحوتة في الصخر الوردي؟", a:"في الأردن"},
+                {points:400, q:"ما هو الضريح الأبيض الرخامي الشهير في الهند الذي بناه إمبراطور حبّاً لزوجته؟", a:"تاج محل"},
+                {points:400, q:"أين تقع تمثال المسيح الفادي العملاق في قمة جبل بكوركوفا؟", a:"في ريو دي جانيرو (البرازيل)"},
+                {points:600, q:"ما هي المدينة الأثرية الماياوية الشهيرة في المكسيك التي تضم هرم كوكولكان؟", a:"تشيتشن إيتزا"},
+                {points:600, q:"أين يقع مدرج الكولوسيوم الروماني التاريخي الشهير؟", a:"في روما (إيطاليا)"}
+            ]},
+            { id: 32, name: "مهرجانات عالمية", icon: "🎉", questions: [
+                {points:200, q:"ما هو اسم كرنفال الرقص والاحتفالات الضخم السنوي الذي يقام في البرازيل؟", a:"كرنفال ريو دي جانيرو"},
+                {points:200, q:"ما هو المهرجان الهندي الشهير الذي يتبادل فيه الناس رمي الألوان المبهجة؟", a:"مهرجان هولي (Holi)"},
+                {points:400, q:"ما هو مهرجان الطماطم السنوي الطريف الذي يقام في مدينة بونول بإسبانيا؟", a:"مهرجان توماتينا (Tomatina)"},
+                {points:400, q:"ما هو أشهر مهرجان سنوي للموسيقى والبيرة يقام في مدينة ميونخ بألمانيا؟", a:"أكتوبرفست (Oktoberfest)"},
+                {points:600, q:"ما هو مهرجان الفوانيس والأنوار السنوي الشهير في تايلاند أو تايوان؟", a:"مهرجان تشونغ مينغ / أو يي بينغ"},
+                {points:600, q:"ما هو مهرجان الجليد والثلج الدولي الضخم الذي يقام في مدينة هاربن؟", a:"مهرجان هاربن للثلج والجليد (الصين)"}
+            ]},
+            { id: 33, name: "أجهزة قياس", icon: "🌡️", questions: [
+                {points:200, q:"ما اسم الجهاز المستخدم لقياس درجة حرارة جسم الإنسان أو الجو؟", a:"مقياس الحرارة (الترمومتر)"},
+                {points:200, q:"ما اسم الجهاز المستخدم لقياس ضغط الدم في الشرايين؟", a:"جهاز قياس الضغط (سفايغومانوميتر)"},
+                {points:400, q:"ما اسم الجهاز المستخدم لقياس سرعة الرياح واتجاهها؟", a:"مقياس سرعة الرياح (الأنيمومتر)"},
+                {points:400, q:"ما اسم الجهاز المستخدم لقياس الزلازل والهزات الأرضية؟", a:"السيسموجراف (مقياس ريختر للزلازل)"},
+                {points:600, q:"ما اسم الجهاز المستخدم لقياس الضغط الجوي في الغلاف الجوي؟", a:"البارومتر (Barometer)"},
+                {points:600, q:"ما اسم الجهاز المستخدم لقياس الرطوبة النسبية في الهواء؟", a:"الهيجرومتر (Hygrometer)"}
+            ]},
+            { id: 34, name: "فنانون تشكيليون", icon: "🎨", questions: [
+                {points:200, q:"من هو الرسام الهولندي الشهير الذي قطع أذنه بنفسه ورسم 'ليلة مرصعة بالنجوم'؟", a:"فنسنت فان غوغ"},
+                {points:200, q:"من هو الرسام الإسباني العبقري مؤسس المدرسة التكعيبية وصاحب لوحة 'الجرنيكا'؟", a:"بابلو بيكاسو"},
+                {points:400, q:"من هو الرسام الإيطالي متعدد التخصصات الذي أبدع لوحة الموناليزا وعشاء الأخير؟", a:"ليوناردو دافنشي"},
+                {points:400, q:"من هو الرسام الإسباني السريالي الشهير الذي اشتهر برسم الساعات الذائبة؟", a:"سالفادور دالي"},
+                {points:600, q:"من هو الرسام الهولندي الذي رسم لوحة 'فتاة ذات قرط مرواري'؟", a:"يوهانس فيرمير"},
+                {points:600, q:"من هو الرسام الإيطالي العظيم الذي نقش سقف كبيلا سيستينا في الفاتيكان؟", a:"مايكل أنجلو"}
+            ]},
+            { id: 35, name: "أدوات مكتبية", icon: "📎", questions: [
+                {points:200, q:"ما هي الأداة المصنوعة من المطاط وتُستخدم لمسح آثار قلم الرصاص على الورق؟", a:"الممساحة (الاستيكة)"},
+                {points:200, q:"ما هي الأداة المعدنية الصغيرة المستخدمة لتثقيب وربط الأوراق ببعضها بالدبابيس؟", a:"الدباسة (الكباس)"},
+                {points:400, q:"ما هي الأداة البلاستيكية أو الخشبية المسطحة المستخدمة لرسم الخطوط المستقيمة والقياس؟", a:"المسطرة"},
+                {points:400, q:"ما هي الأداة اللاصقة الشفافة المصنوعة من البلاستيك وتُستخدم للوصف واللصق السريع؟", a:"الشريط اللاصق (السلوتيب)"},
+                {points:600, q:"ما هي الأداة المعدنية الدائرية الصغيرة المستخدمة لجمع الأوراق معاً مؤقتاً؟", a:"مشبك الورق (Paperclip)"},
+                {points:600, q:"ما هي الآلة الصغيرة المحمولة المُستخدمة لإجراء العمليات الحسابية السريعة؟", a:"الآلة الحاسبة"}
+            ]},
+            { id: 36, name: "أشهر القلاع", icon: "🏰", questions: [
+                {points:200, q:"ما اسم القلعة التاريخية الشهيرة في العاصمة السورية دمشق؟", a:"قلعة دمشق"},
+                {points:200, q:"ما اسم القلعة الأثرية الضخمة فوق جبل المقطم في مصر والتي بناها صلاح الدين؟", a:"قلعة صلاح الدين الأيوبي (القاهرة)"},
+                {points:400, q:"ما اسم القلعة الألمانية الساحرة الشهيرة التي تشبه قصص الخيال وتلهم ديزني؟", a:"قلعة نويشفانشتاين"},
+                {points:400, q:"ما اسم القلعة التاريخية الشهيرة في وسط العاصمة الإسكتلندية إدنبرة؟", a:"قلعة إدنبرة"},
+                {points:600, q:"ما اسم القلعة اليابانية الشهيرة المحاطة بأشجار الكرز في أوساكا؟", a:"قلعة أوساكا"},
+                {points:600, q:"ما اسم القلعة التاريخية الشهيرة في حلب بسوريا؟", a:"قلعة حلب"}
+            ]},
+            { id: 37, name: "عالم الحشرات", icon: "🐝", questions: [
+                {points:200, q:"ما هي الحشرة النافعة التي تنتج لنا العسل اللذيذ وتعيش في خلايا منظمة؟", a:"النحلة"},
+                {points:200, q:"ما هي الحشرة الصغيرة المزعجة التي تتغذى على دماء الكائنات الحية وتملك قدرة هائلة على القفز؟", a:"البرغوث (أو البعوضة)"},
+                {points:400, q:"ما هي الحشرة ذات الأجنحة الملونة الجميلة والتي تبدأ حياتها كـ 'يرقة أو دودة قز'؟", a:"الفراشة"},
+                {points:400, q:"ما هي الحشرة الاجتماعية القوية التي تستطيع حمل أضعاف وزنها بمئات المرات؟", a:"النملة"},
+                {points:600, q:"ما هي الحشرة المضيئة ليلاً التي تصدر ومضات ضوئية حيوية للتواصل؟", a:"اليراع (اليرعة / الحشرة المضيئة)"},
+                {points:600, q:"ما هو اسم الحشرة القافزة التي تصدر أصواتاً موسيقية باحتكاك أرجلها وتأكل المحاصيل؟", a:"الجراد (أو الصرصور / الجندب)"}
+            ]},
+            { id: 38, name: "أنواع القهوة", icon: "☕", questions: [
+                {points:200, q:"ما اسم القهوة الإيطالية المركزة والصغيرة جداً التي تُقدم في فنجان صغير؟", a:"إسبريسو (Espresso)"},
+                {points:200, q:"ما اسم القهوة الشهيرة المكونة من إسبريسو وحليب ساخن ورغوة كثيفة؟", a:"كابتشينو (Cappuccino)"},
+                {points:400, q:"ما اسم القهوة الإيطالية المكونة من إسبريسو مع كمية كبيرة من الحليب الساخن وقليل من الرغوة؟", a:"لاتيه (Caffè Latte)"},
+                {points:400, q:"ما هي القهوة التقليدية العربية الأصيلة التي تُطحن مع حبات الهيل وتقدم في دلة؟", a:"القهوة العربية"},
+                {points:600, q:"ما اسم القهوة المثلجة الشهيرة التي أُبتكرت في مدينة غريز باليونان؟", a:"فرابيه (Frappé) / أو آيس كوفي"},
+                {points:600, q:"ما اسم حبوب القهوة الفاخرة التي تُستخرج بعد مرورها بجهاز هضم حيوان الزباد البري؟", a:"قهوة كوبي لواك (Kopi Luwak)"}
+            ]},
+            { id: 39, name: "مفاهيم اقتصادية", icon: "💰", questions: [
+                {points:200, q:"ما هو الاسم الذي يُطلق على الارتفاع المستمر في أسعار السلع والخدمات وتراجع قيمة العملة؟", a:"التضخم (Inflation)"},
+                {points:200, q:"ما هو السوق المالي الضخم الذي تُباع وتُشترى فيه أسهم الشركات؟", a:"البورصة (سوق الأسهم)"},
+                {points:400, q:"ما هو مصطلح 'الركود الاقتصادي'؟", a:"انكماش اقتصادي وتراجع الناتج المحلي لفترات طويلة"},
+                {points:400, q:"ما هي العملة الرقمية المشفرة الأولى والأشهر في العالم التي أنشأها ساتوشي ناكاموتو؟", a:"بتكوين (Bitcoin)"},
+                {points:600, q:"ما هو المصطلح الاقتصادي الذي يشير إلى مجموع السلع والخدمات المنتجة في دولة خلال عام؟", a:"الناتج المحلي الإجمالي (GDP)"},
+                {points:600, q:"ما اسم البنك المركزي المسؤول عن إصدار العملة والسياسة النقدية في أي دولة؟", a:"البنك المركزي"}
+            ]},
+            { id: 40, name: "معدات تصوير", icon: "📷", questions: [
+                {points:200, q:"ما هو الجهاز الإلكتروني المستخدم التقاط الصور الفوتوغرافية الثابتة والمتحركة؟", a:"الكاميرا"},
+                {points:200, q:"ما هي العدسة الزجاجية الأساسية في الكاميرا التي تُستخدم لتكبير وتصغير المشهد وتوجيه الضوء؟", a:"عدسة الكاميرا (Lens)"},
+                {points:400, q:"ما هو القطعة الضوئية الفلاشية المنفصلة المستخدمة لإضاءة المشاهد المظلمة أثناء التصوير؟", a:"الفلاش (Flash)"},
+                {points:400, q:"ما اسم الحامل ثلاثي الأرجل المستخدم لتثبيت الكاميرا ومنع اهتزاز الصور؟", a:"الحامل الثلاثي (Tripod)"},
+                {points:600, q:"ما هو الجزء الحساس الإلكتروني داخل الكاميرا الرقمية الذي يلتقط الضوء ويحوله لصورة؟", a:"المستشعر (Sensor)"},
+                {points:600, q:"ما هو نوع الكاميرات الاحترافية التي تستخدم مرآة عاكسة لرؤية المشهد بدقة عبر العدسة؟", a:"كاميرات DSLR (رقمية ذات عدسة أحادية العكس)"}
+            ]},
+            { id: 41, name: "عالم النباتات", icon: "🌿", questions: [
+                {points:200, q:"ما هو الجزء الرئيسي في النبات المسؤول عن امتصاص الماء والمعادن من التربة؟", a:"الجذور"},
+                {points:200, q:"ما هي العملية الحيوية التي تصنع بها النباتات غذاءها باستخدام ضوء الشمس وثاني أكسيد الكربون؟", a:"البناء الضوئي (التمثيل الضوئي)"},
+                {points:400, q:"ما هو اسم النبات الصحراوي العصاري الذي يخزن الماء في أوراقه ويستخدم طبياً للتجميل؟", a:"الصبار (الويفيرا / الألوفيرا)"},
+                {points:400, q:"ما هي الزهرة الشهيرة التي تتبع حركة الشمس طوال اليوم في الحقول؟", a:"زهرة عباد الشمس (السندويش / البجعة)"},
+                {points:600, q:"ما هو اسم أكبر زهرة في العالم والتي تتميز برائحتها الكريهة الشبيهة باللحم الفاسد؟", a:"رافليسيا أرنولدي"},
+                {points:600, q:"ما هي الشجرة المباركة التي ذُكرت في القرآن الكريم ويُستخرج منها زيت مبارك؟", a:"شجرة الزيتون"}
+            ]},
+            { id: 42, name: "قصص خيالية", icon: "🧚", questions: [
+                {points:200, q:"ما اسم الفتاة الصغيرة التي فقدت حذاءها الزجاجي في قصر الأمير بمنتصف الليل؟", a:"سندريلا (Cinderella)"},
+                {points:200, q:"ما اسم الفتاة التي نامت سبع سنوات أو غيبوبة طويلة إثر وخزة إبرة مغزل (الجميلة النائمة)؟", a:"أورورا (الجميلة النائمة)"},
+                {points:400, q:"ما اسم الفتاة الصغيرة ذات الرداء الأحمر التي ذهبت لزيارة جدتها وواجهت الذئب؟", a:"ليلى والذئب (ذات الرداء الأحمر)"},
+                {points:400, q:"ما اسم الفتى الصغير الذي كان يملك سحراً ونبتة فاصوليا عملاقة تصل للسماء وقلعة العمالقة؟", a:"جاك ونبتة الفاصوليا"},
+                {points:600, q:"ما اسم العرائس الخشبية التي كان يکذب وتطول أنفه كلما كذب في القصة الشهيرة؟", a:"بينوكيو (Pinocchio)"},
+                {points:600, q:"ما اسم الفتاة ذات الشعر الطويل جداً الذهبي السحري المحبوسة في برج عالٍ؟", a:"رابونزل (Rapunzel)"}
+            ]},
+            { id: 43, name: "محطات قطار", icon: "🚆", questions: [
+                {points:200, q:"ما هو اسم محطة القطار السحري الشهيرة في سلسلة هاري بوتر (رصيف رقم 9 وثلاثة أرباع)؟", a:"محطة كينغز كروس (King's Cross)"},
+                {points:200, q:"ما اسم أشهر محطة قطارات مركزية تاريخية ضخمة في مدينة نيويورك الأمريكية؟", a:"محطة غراند سنترال (Grand Central)"},
+                {points:400, q:"ما اسم قطار السكك الحديدية فائق السرعة الشهير في اليابان ويشبه شكل رصاصة؟", a:"شينكانسن (القطار الطلقة Bullet Train)"},
+                {points:400, q:"ما اسم محطة قطارات يوروستار الشهيرة التي تربط لندن بباريس تحت البحر؟", a:"محطة سانت بانكراس الدولية"},
+                {points:600, q:"ما هو اسم قطار الفخامة والأسطورة التاريخي الذي كان يربط بين باريس وإسطنبول؟", a:"قطار الشرق السريع (Orient Express)"},
+                {points:600, q:"ما هي أطول سكة حديد قطارات في العالم وتمر عبر روسيا بالكامل من موسكو لفاديفوستوك؟", a:"سكة حديد العابرة لسيبيريا (Trans-Siberian)"}
+            ]},
+            { id: 44, name: "ماركات سيارات", icon: "🚗", questions: [
+                {points:200, q:"ما هو شعار شركة مرسيدس بنز الألمانية الشهيرة؟", a:"النجمة الثلاثية"},
+                {points:200, q:"ما هي الشركة المصنعة لسيارات 'مستانغ' الرياضية العضلية؟", a:"فورد (Ford)"},
+                {points:400, q:"ما هو شعار شركة بي إم دبليو الألمانية (يرمز لروتور طائرة أبيض وأزرق)؟", a:"الدائرة المقسمة بالأزرق والأبيض"},
+                {points:400, q:"ما هي الشركة الإيطالية الفاخرة للسيارات الخارقة التي تحمل اسم مؤسسها وتشتهر بلونها الأصفر أو الشعار الثور الهائج؟", a:"لامبورغيني (Lamborghini)"},
+                {points:600, q:"ما اسم الشركة البريطانية الفاخرة جداً التي تصنع سيارات مثل 'فانتوم' و'جوست' وتتبع بي إم دبليو؟", a:"رولز رويس (Rolls-Royce)"},
+                {points:600, q:"ما اسم شركة السيارات السويدية التي تشتهر عالمياً بأعلى معايير الأمان والسلامة في العالم؟", a:"فولفو (Volvo)"}
+            ]},
+            { id: 45, name: "أدوات قياس الزمن", icon: "⏳", questions: [
+                {points:200, q:"ما هي الأداة القديمة المصنوعة من الزجاج الممتلئ بالرمل لقياس فترات زمنية قصيرة؟", a:"الساعة الرملية (Hourglass)"},
+                {points:200, q:"ما هو الجهاز القديم الذي يعتمد على حركة ظل الشمس لمعرفة الوقت خلال النهار؟", a:"الساعة الشمسية (Sundial)"},
+                {points:400, q:"ما اسم الساعة الدقيقة جداً الرياضية التي تُستخدم لقياس أزمنة السباقات والجري بدقة أجزاء الثانية؟", a:"ساعة الإيقاف (Stopwatch)"},
+                {points:400, q:"ما اسم الساعة الكبيرة ذات البندول المتأرجح التقليدي المثبتة على الجدران أو الحوامل؟", a:"ساعة البندول (Pendulum clock)"},
+                {points:600, q:"ما هي أقدم ساعة ميكانيكية عامة في العالم ولا تزال تعمل بدقة في براغ؟", a:"الساعة الفلكية لبراغ"},
+                {points:600, q:"ما هو الجهاز الميكانيكي أو الإلكتروني الدقيق داخل الساعات الذي ينظم حركة العقارب؟", a:"الزنبرك / أو الآلية الحركية (Movement)"}
+            ]},
+            { id: 46, name: "معالم أثرية", icon: "🏛️", questions: [
+                {points:200, q:"أين تقع الأهرامات الثلاثة الكبرى وتمثال أبو الهول في مصر؟", a:"في محافظة الجيزة (هضبة الجيزة)"},
+                {points:200, q:"ما هو اسم معبد الأكروبوليس التاريخي الشهير الذي يقع على تلة في أثينا؟", a:"البارثينون (Parthenon)"},
+                {points:400, q:"أين تقع آثار مدينة مَكْشُو التاريخية أو مدينة الإنكا الشهيرة فوق جبال الأنديز ببيرو؟", a:"ماتشو بيتشو (Machu Picchu)"},
+                {points:400, q:"ما هو اسم المعبد الضخم الهائل الديني في كمبوديا والذي يُعد أكبر نصلي ديني بالعالم؟", a:"أنغكور وات (Angkor Wat)"},
+                {points:600, q:"أين تقع آثار مدينة بومبي الرومانية القديمة التي دفنها بركان جبل فيزوف؟", a:"إيطاليا (قرب نابولي)"},
+                {points:600, q:"ما هو اسم النصب الصخري الغامض والدائري القديم الشهير في بريطانيا (ستونهينج)؟", a:"ستونهينج (Stonehenge)"}
+            ]},
+            { id: 47, name: "فنانو الكرتون", icon: "🎙️", questions: [
+                {points:200, q:"من هو مبتكر شخصيات ديزني الشهيرة مثل ميكي ماوس ودونالد داك؟", a:"والت ديزني (Walt Disney)"},
+                {points:200, q:"من هو المخرج الياباني الأسطوري المؤسس لاستوديو غيبلي ومخرج 'مملكة الروح' (Spirited Away)؟", a:"هاياو ميازاكي"},
+                {points:400, q:"من هو مبتكر شخصية سبونج بوب سكوير بانتز وقاع بياتش؟", a:"ستيفن هيلنبرغ"},
+                {points:400, q:"من هو المبتكر الأمريكي الشهير لمسلسلات عائلة سمبسون (The Simpsons)؟", a:"マット・グレイニング (مات غرينينغ)"},
+                {points:600, q:"من هو مبتكر شخصيات لوني تيونز والباغز باني الشهيرة؟", a:"تيكس أيفري / تشاك جونز"},
+                {points:600, q:"من هو المخرج الياباني الشريك في استوديو غيبلي وأخرج أفلاماً مؤثرة مثل 'قبر الفراشات'؟", a:"إيزاو تاكاهاتا"}
+            ]},
+            { id: 48, name: "ظواهر طبيعية", icon: "🌪️", questions: [
+                {points:200, q:"ما هي العاصفة الهوائية الدوامية العنيفة التي تأخذ شكل قمع ومخروط يدمر كل ما يمر به؟", a:"الإعصار القمعي (التورنادو)"},
+                {points:200, q:"ما هي الظاهرة الضوئية الملونة الخلابة التي تظهر في سماء القطبين الشمالي والجنوبي؟", a:"الشفق القطبى (الاورورا / الأضواء الشمالية)"},
+                {points:400, q:"ما هو البرق المضيء الضخم الذي يظهر أحياناً على شكل كرة نارية غامضة في السماء؟", a:"البرق الكروي (Ball lightning)"},
+                {points:400, q:"ما هي ظاهرة انحسار مياه البحر المفاجئ وارتفاعها الهائل بسبب زلزال بحري تدميري؟", a:"تسونامي (Tsunami)"},
+                {points:600, q:"ما هو اسم سحابة الغبار أو الرمال العملاقة التي تجتاح الصحاري وتزيل الرؤية تماماً؟", a:"العاصفة الرملية الهوجاء (الحباب / العجاج)"},
+                {points:600, q:"ما هي ظاهرة هطول أمطار تحتوي على مواد حمضية نتيجة تلوث الهواء بغازات المصانع؟", a:"المطر الحمضي"}
+            ]},
+            { id: 49, name: "عالم البراكين", icon: "🌋", questions: [
+                {points:200, q:"ما هو اسم البركان الإيطالي المدمر الشهير الذي طمر مدينة بومبي الرومانية بالكامل؟", a:"جبل فيزوف (Mount Vesuvius)"},
+                {points:200, q:"ما هو اسم البركان النشط الأضخم والأشهر في جزيرة صقلية بإيطاليا؟", a:"بركان إتنا (Etna)"},
+                {points:400, q:"ما اسم البركان النشط الشهير والمرتفع في دولة إندونيسيا (أو بركان جبل فوجي باليابان)؟", a:"جبل فوجي (اليابان) / أو بركان كراكاتوا"},
+                {points:400, q:"ما هو اسم الحمم البركانية المنصهرة الحارقة السائلة التي تخرج من بطن البركان؟", a:"الحمم البركانية (الماغما / اللาวا Lava)"},
+                {points:600, q:"ما اسم السلسلة الضخمة من البراكين النشطة المحيطة بحوض المحيط الهادي وتُسمى 'حلقة النار'؟", a:"حلقة النار في المحيط الهادي (Ring of Fire)"},
+                {points:600, q:"ما اسم البركان العملاق الضخم النائم تحت حديقة يلوستون الوطنية الأمريكية؟", a:"بركان يلوستون الخارق (Supervolcano)"}
+            ]},
+            { id: 50, name: "وسائل نقل قديمة", icon: "⛵", questions: [
+                {points:200, q:"ما هي وسيلة النقل القديمة التي تعتمد على الحيوانات (الخيول والجمال) لجر العربات؟", a:"عربة الخيول (الحنطور / الكاريّي)"},
+                {points:200, q:"ما هو اسم السفينة الخشبية الشراعية الكبيرة القديمة التي استخدمها العرب في التجارة والغوص؟", a:"السفينة الشراعية (البوم / السمبوك / البانوش)"},
+                {points:400, q:"ما اسم المركب الخشبي الصغير البسيط الذي يُدفَع بالمقاديف في الأنهار والبحيرات؟", a:"القارب (المقداف / الكاياك القديم)"},
+                {points:400, q:"ما هي وسيلة النقل القديمة التي كانت تسير على قضبان حديدية وتُجر بالفحم والبخار؟", a:"القطار البخاري القديم"},
+                {points:600, q:"ما هو اسم المركب الشراعي العربي التقليدي الشهير ذو الشراع المثلث الكبير؟", a:"المركب الشراعي (البتيل / أو الداو البجلي)"},
+                {points:600, q:"ما اسم العربة التي كان يجرها شخص بشري على قدميه لتنقل الأفراد في دول شرق آسيا قديماً؟", a:"عربة الريكشا (Rickshaw)"}
+            ]},
+            { id: 51, name: "ألعاب ورقية", icon: "🃏", questions: [
+                {points:200, q:"ما هو اسم اللعبة الورقية الشهيرة التي تضم 52 ورقة وتنقسم لأربعة ألوان ورموز (كوتشينة)؟", a:"ورق اللعب (الكوتشينة / الشدة)"},
+                {points:200, q:"ما اسم اللعبة الورقية الشهيرة لتخمين الكلمات والرسومات بدون كلام (أو لعبة الشدة الشهيرة 'البوكر' أو 'البلوت')؟", a:"لعبة البلوت / أو البوكر / أونو"},
+                {points:400, q:"ما هو اسم ورق اللعب الشهير الملون الذي يحوي أرقاماً وعلامات سحب وتغيير اتجاه (أونو)؟", a:"بطاقات أونو (Uno Cards)"},
+                {points:400, q:"ما اسم لعبة الورق الاستراتيجية الشهيرة التي تجمع وحوشاً ومبارزات (يوغي أوه)؟", a:"بطاقات يوغي (Yu-Gi-Oh)"},
+                {points:600, q:"ما هي اللعبة الورقية التي تعتمد على تجميع المجموعات والأزواج وتُسمى أحياناً 'الشايب' أو 'العميل السرّي'؟", a:"لعبة الشايب (أو الكوتشينة التقليدية)"},
+                {points:600, q:"ما اسم لعبة الورق التي تسمى 'ماجيك: ذا غاذرينغ' وتُعتبر الأولى من نوعها عالمياً؟", a:"ماجيك: ذا غاذرينغ (Magic: The Gathering)"}
+            ]},
+            { id: 52, name: "أشهر الفنادق", icon: "🏨", questions: [
+                {points:200, q:"ما اسم الفندق الفاخر الشهير عالمياً على شكل شراع في مدينة دبي الإماراتية؟", a:"فندق برج العرب"},
+                {points:200, q:"ما اسم الفندق التاريخي الأسطوري الفاخر في إسطنبول الذي أقام فيه كتاب عالميون مثل أغاثا كريستي؟", a:"فندق بيرا پالاس (Pera Palace)"},
+                {points:400, q:"ما اسم الفندق الفاخر الضخم الذي يقع في برج الساعة بمكة المكرمة؟", a:"فندق فيرمونت برج الساعة مكة"},
+                {points:400, q:"ما اسم الفندق الشهير في باريس الذي يُعتبر رمزاً للفخامة الفرنسية الملكية المطلقة؟", a:"فندق ريتز باريس (Ritz Paris)"},
+                {points:600, q:"ما اسم الفندق التاريخي المرعب الذي ألهم ستيفن كينغ لكتابة رواية 'البريق' (The Shining)؟", a:"فندق ستانلي (Stanley Hotel)"},
+                {points:600, q:"ما اسم الفندق الفاخر الشهير في لاس فيغاس بتصميمه الذي يحاكي مدينة البندقية الإيطالية؟", a:"فندق البندقية (The Venetian Las Vegas)"}
+            ]},
+            { id: 53, name: "موسيقى وآلات", icon: "🎸", questions: [
+                {points:200, q:"ما هي الآلة الوترية الشهيرة ذات الأوتار الستة والتي تُستخدم في أغاني الروك والباب والموسيقى العامة؟", a:"الغيتار (الجيتار)"},
+                {points:200, q:"ما هي آلة المفاتيح السوداء والبيضاء الضخمة التقليدية التي تُعزف بكلتا اليدين؟", a:"البيانو (Piano)"},
+                {points:400, q:"ما هي آلة النفخ النحاسية الطويلة اللامعة ذات الصوت الجهير والرائع في الجاز؟", a:"الساكسفون (Saxophone) / أو البوق"},
+                {points:400, q:"ما هي الآلة الشرقية الوترية الشهيرة ذات البطن المنتفخ والعنق القصير وتُعرف بسلطان الأجهزة؟", a:"العود العربي"},
+                {points:600, q:"ما هي الآلة الموسيقية الوترية الكلاسيكية الكبيرة التي تُعزف باستخدام القوس (توضع على الكتف)؟", a:"الكمان (Violin)"},
+                {points:600, q:"ما هي آلة الإيقاع الشرقية الشهيرة المصنوعة من الفخار أو المعدن والجلد (درامز شرقي)؟", a:"الطبلة (الدربكة / الرق)"}
+            ]},
+            { id: 54, name: "أشهر الموانئ", icon: "🚢", questions: [
+                {points:200, q:"ما اسم الميناء البحري الضخم والشهير في مدينة دبي (ميناء جبل علي)؟", a:"ميناء جبل علي"},
+                {points:200, q:"ما هو الميناء الأكبر في قارة أوروبا ويقع في دولة هولندا (مدينة روتردام)؟", a:"ميناء روتردام"},
+                {points:400, q:"ما اسم الميناء التاريخي الشهير في مدينة الإسكندرية بمصر؟", a:"ميناء الإسكندرية"},
+                {points:400, q:"ما هو الميناء الأكبر في قارة آسيا والعالم من حيث حجم الشحن ويقع في الصين؟", a:"ميناء شانغهاي"},
+                {points:600, q:"ما اسم الميناء التاريخي الشهير في مدينة سنغافورة التجاري الضخم؟", a:"ميناء سنغافورة"},
+                {points:600, q:"ما اسم الميناء الرئيسي في مدينة هامبورغ بألمانيا ويُعد بوابة أوروبا البحرية؟", a:"ميناء هامبورغ"}
+            ]},
+            { id: 55, name: "مفاهيم فلكية", icon: "🔭", questions: [
+                {points:200, q:"ما هو اسم خط الاستواء السماوي أو الخط الوهمي الذي يقسم الكرة السماوية نصفين؟", a:"خط الاستواء السماوي"},
+                {points:200, q:"ما هي الظاهرة الفلكية التي يحجب فيها القمر ضوء الشمس عن الأرض كلياً أو جزئياً؟", a:"كسوف الشمس"},
+                {points:400, q:"ما هي الظاهرة الفلكية التي تدخل فيها الأرض بين الشمس والقمر فيظلل ظل الأرض القمر؟", a:"خسوف القمر"},
+                {points:400, q:"ما هو اسم النجم القطبي الشهير الذي كان البحارة يستدلون به على الاتجاهات شمالاً؟", a:"النجم القطبي (Polaris)"},
+                {points:600, q:"ما هي السنة الضوئية؟", a:"المسافة التي يقطعها الضوء في سنة كاملة"},
+                {points:600, q:"ما هو اسم الكويكب العملاق أو المذنب الشهير الذي يزور مدار الأرض كل 75-76 سنة؟", a:"مذنب هالي (Halley's Comet)"}
+            ]},
+            { id: 56, name: "أزياء وموضة", icon: "👜", questions: [
+                {points:200, q:"ما هي المدينة الأوروبية التي تُعتبر العاصمة العالمية الأولى للموضة والأزياء الراقية؟", a:"باريس (فرنسا)"},
+                {points:200, q:"ما اسم الحقيبة النسائية الفاخرة الشهيرة جداً التي تصنعها دار 'هيرميس' وتُعد رمزاً للثراء؟", a:"حقيبة بيركين (Birkin Bag)"},
+                {points:400, q:"ما هو اسم دار الأزياء الإيطالية الشهيرة التي أسسها غوتشيو غوتشي؟", a:"غوتشي (Gucci)"},
+                {points:400, q:"ما هو اسم المصمم الفرنسي الأسطوري الذي ابتكر 'الفستان الأسود القصير' وعطر شانيل رقم 5؟", a:"كوكو شانيل (Coco Chanel)"},
+                {points:600, q:"ما اسم العلامة التجارية الفرنسية الفاخرة الشهيرة بنقشتها البنية المميزة لصناديق السفر والحقائب (LV)؟", a:"لويس فويتون (Louis Vuitton)"},
+                {points:600, q:"ما هو اسم الحدث الضخم السنوي للموضة الذي يقام في متحف المترو بنيويورك ويحضره المشاهير (Met Gala)؟", a:"ميت غالا (Met Gala)"}
+            ]},
+            { id: 57, name: "أدوات قياس الكتلة", icon: "⚖️", questions: [
+                {points:200, q:"ما هي الأداة الكلاسيكية التقليدية ذات الكفتين المستخدمة لوزن الأشياء والمعادن؟", a:"الميزان ذو الكفتين (ميزان الذهب)"},
+                {points:200, q:"ما هي وحدة القياس الدولية الأساسية لوزن وكتلة الأجسام في الفيزياء؟", a:"الكيلوغرام (والغرام)"},
+                {points:400, q:"ما اسم الميزان الإلكتروني الحديث الرقمي المستخدم لوزن الأطعمة في المتاجر والمطابخ؟", a:"الميزان الرقمي (الديجيتال)"},
+                {points:400, q:"ما هي وحدة قياس الأوزان الكبيرة جداً كالسيارات والحاويات (تساوي 1000 كغ)؟", a:"الطن (Tonne)"},
+                {points:600, q:"ما اسم الميزان الضخم جداً المُستخدم لوزن الشاحنات والبضائع الكبرى في الطرقات؟", a:"ميزان القنطار / ميزان الشاحنات العملاق"},
+                {points:600, q:"ما هي وحدة القياس المستخدمة لوزن الألماس والأحجار الكريمة الدقيقة (تساوي 0.2 غرام)؟", a:"القراط (Carat)"}
+            ]},
+            { id: 58, name: "شخصيات تاريخية عربية", icon: "📜", questions: [
+                {points:200, q:"من هو الشاعر الجاهلي العبقري صاحب المعلقة الشهيرة وأحد أشهر شع العرب (ملقّب بالملك الضليل)؟", a:"امرؤ القيس"},
+                {points:200, q:"من هو الرحالة المغربي العظيم الذي طاف العالم لأكثر من 29 عاماً؟", a:"ابن بطوطة"},
+                {points:400, q:"من هو العالم المسلم العبقري مؤسس علم الجبر ومخترع الأرقام العربية (الخوارزمي)؟", a:"محمد بن موسى الخوارزمي"},
+                {points:400, q:"من هو الطبيب والعالم المسلم العظيم صاحب كتاب 'القانون في الطب' (الشيخ الرئيس)؟", a:"ابن سينا (أبي علي السينا)"},
+                {points:600, q:"من هو العالم المسلم العبقري رائد علم البصريات ومؤلف كتاب 'المناظر' (ابن الهيثم)؟", a:"الحسن بن الهيثم"},
+                {points:600, q:"من هو المؤسس الحقيقي لعلم الاجتماع الحديث ومؤلف 'المقدمة' الشهيرة؟", a:"ابن خلدون"}
+            ]},
+            { id: 59, name: "عالم الزهور", icon: "🌷", questions: [
+                {points:200, q:"ما هي الزهرة الحمراء الشهيرة التي تُعتبر الرمز العالمي الأول للحب والرومانسية؟", a:"الوردة الحمراء (الجوري / الورد الجوري)"},
+                {points:200, q:"ما هي الزهرة الهولندية الشهيرة ذات الألوان المبهجة المتعددة والتي ترمز للربيع؟", a:"زهرة التوليب (Tulip)"},
+                {points:400, q:"ما هي الزهرة الكبيرة ذات اللون الأصفر الفاتح التي تشبه الشمس وتتبع شعاعها؟", a:"زهرة عباد الشمس (الشمسية)"},
+                {points:400, q:"ما هي الزهرة العطرية البنفسجية الشهيرة التي تُزرع في حقول جنوب فرنسا وتُستخدم للعطور؟", a:"الخزامى (اللافندر - Lavender)"},
+                {points:600, q:"ما هي الزهرة المقدسة في الثقافات الآسيوية والتي تنبت وتزهر فوق المياه الوحلية بنقاء؟", a:"زهرة اللوتس (Lotus)"},
+                {points:600, q:"ما اسم الزهرة البيضاء الرقيقة الصغيرة التي تُنبئ ببداية فصل الربيع وتنمو وسط الثلج؟", a:"زهرة قطران الشتاء (أو زهرة الأقحوان البرية / أو قطرة الثلج Snowdrop)"}
+            ]},
+            { id: 60, name: "ألعاب ذكاء وتفكير", icon: "🧠", questions: [
+                {points:200, q:"ما اسم لعبة الألغاز والمكعبات السحرية الملونة التي تدور أجزاؤها لتتطابق الألوان (روبيك)؟", a:"مكعب روبيك (Rubik's Cube)"},
+                {points:200, q:"ما اسم لعبة التفكير والحروب الاستراتيجية القديمة على رقعة مربعة سوداء وبيضاء بالقطاعات الملكية؟", a:"الشطرنج (Chess)"},
+                {points:400, q:"ما اسم لعبة الكلمات المتصالبة الشهيرة أو لعبة الأرقام اليابانية المكونة من شبكة 9×9؟", a:"سودوكو (Sudoku)"},
+                {points:400, q:"ما اسم لعبة التركيب الشهيرة المصنوعة من قطع بلاستيكية صغيرة تتداخل لبناء مجسمات؟", a:"ليغو (LEGO)"},
+                {points:600, q:"ما اسم لعبة التفكير الكلاسيكية التي تحرك فيها أقراصاً دائرية عبر أعمدة دون وضع قرص كبير فوق صغير؟", a:"أبراج هانوي (Towers of Hanoi)"},
+                {points:600, q:"ما اسم اللعبة الجماعية الورقية التي تحاول فيها تخمين الكلمة السرية من خلال فريقك (كود أسماء)؟", a:"لعبة كود نيمز (Codenames)"}
             ]}
         ];
 
         let selectedCategoryIds = [];
+        let currentTurn = 'player1'; // تبدأ بـ player1
+        let currentPoints = 200;
 
         const pickerGrid = document.getElementById('pickerGrid');
         allCategories.forEach(cat => {
             const card = document.createElement('div');
             card.classList.add('picker-card');
             card.innerHTML = `
-                <div style="font-size: 1.8rem; margin-bottom: 3px;">${cat.icon}</div>
+                <div style="font-size: 1.5rem; margin-bottom: 2px;">${cat.icon}</div>
                 <h4>${cat.name}</h4>
                 <span>6 أسئلة ممتعة</span>
             `;
@@ -681,8 +955,6 @@
         }
 
         let activeCategoriesData = [];
-        let currentCatIdx = 0;
-        let currentQIdx = 0;
         let activeTileElement = null;
         let currentAnswerText = "";
 
@@ -690,7 +962,30 @@
             activeCategoriesData = allCategories.filter(cat => selectedCategoryIds.includes(cat.id));
             document.getElementById('selectionScreen').style.display = 'none';
             document.getElementById('gameScreen').style.display = 'flex';
+            updateTurnDisplay();
             buildBoard();
+        }
+
+        function getPlayerName(p) {
+            return document.getElementById(p === 'player1' ? 'name1' : 'name2').value || (p === 'player1' ? 'اللاعب 1' : 'اللاعب 2');
+        }
+
+        function updateTurnDisplay() {
+            const name = getPlayerName(currentTurn);
+            document.getElementById('turnDisplay').innerText = `دور اللاعب: ${name}`;
+            
+            if (currentTurn === 'player1') {
+                document.getElementById('p1Box').classList.add('active-turn');
+                document.getElementById('p2Box').classList.remove('active-turn');
+            } else {
+                document.getElementById('p2Box').classList.add('active-turn');
+                document.getElementById('p1Box').classList.remove('active-turn');
+            }
+        }
+
+        function switchTurn() {
+            currentTurn = currentTurn === 'player1' ? 'player2' : 'player1';
+            updateTurnDisplay();
         }
 
         function buildBoard() {
@@ -703,7 +998,7 @@
                     tile.innerHTML = `<span>${qObj.points}</span><span class="cat-label">${cat.name}</span>`;
                     tile.addEventListener('click', () => {
                         if (!tile.classList.contains('disabled')) {
-                            openQuestionModal(catIdx, qIdx, tile);
+                            openQuestionModal(catIdx, qIdx, tile, qObj.points);
                         }
                     });
                     boardGrid.appendChild(tile);
@@ -711,19 +1006,19 @@
             });
         }
 
-        function openQuestionModal(catIdx, qIdx, tileElement) {
-            currentCatIdx = catIdx;
-            currentQIdx = qIdx;
+        function openQuestionModal(catIdx, qIdx, tileElement, points) {
             activeTileElement = tileElement;
+            currentPoints = points;
             const category = activeCategoriesData[catIdx];
             const qData = category.questions[qIdx];
             currentAnswerText = qData.a;
 
-            document.getElementById('modalCategory').innerText = `فئة: ${category.name} (${qData.points} نقطة)`;
+            document.getElementById('modalCategory').innerText = `فئة: ${category.name} (${points} نقطة)`;
+            document.getElementById('modalTurnAlert').innerText = `دور اللاعب: ${getPlayerName(currentTurn)} للإجابة!`;
             document.getElementById('modalQuestionText').innerText = qData.q;
             
             const ansDiv = document.getElementById('modalAnswerText');
-            ansDiv.innerText = "[اضغط هنا لعرض الإجابة الصحيحة]";
+            ansDiv.innerText = "[اضغط هنا لعرض الإجابة الصحيحة ومقارنتها]";
             ansDiv.style.color = "#16a34a";
 
             document.getElementById('questionModal').style.display = 'flex';
@@ -735,20 +1030,43 @@
             ansDiv.style.color = "#dc2626";
         }
 
+        function awardPoints(isCorrect) {
+            if (isCorrect) {
+                adjustScore(currentTurn, currentPoints);
+            }
+            closeModalAndSwitch();
+        }
+
+        function handleWrongAnswer() {
+            alert(`إجابة خاطئة يا ${getPlayerName(currentTurn)}! انتقل الدور للخصم ليحاول الإجابة أو الخطف.`);
+            switchTurn();
+            document.getElementById('modalTurnAlert').innerText = `فرصة الخطف الآن للاعب: ${getPlayerName(currentTurn)}!`;
+        }
+
+        function closeModalAndSwitch() {
+            document.getElementById('questionModal').style.display = 'none';
+            if (activeTileElement) {
+                activeTileElement.classList.add('disabled');
+                activeTileElement.innerHTML = `<span>✓</span><span class="cat-label">تم</span>`;
+            }
+            switchTurn();
+        }
+
         function closeModal() {
             document.getElementById('questionModal').style.display = 'none';
             if (activeTileElement) {
                 activeTileElement.classList.add('disabled');
                 activeTileElement.innerHTML = `<span>✓</span><span class="cat-label">تم</span>`;
             }
+            switchTurn();
         }
 
-        let scores = { player1: 400, player2: 400 };
-
         function adjustScore(player, amount) {
-            scores[player] += amount;
-            document.getElementById('score1').innerText = scores.player1;
-            document.getElementById('score2').innerText = scores.player2;
+            const scoreElem = document.getElementById(player === 'player1' ? 'score1' : 'score2');
+            let currentScore = parseInt(scoreElem.innerText) || 0;
+            currentScore += amount;
+            if(currentScore < 0) currentScore = 0;
+            scoreElem.innerText = currentScore;
         }
     </script>
 </body>
