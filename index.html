@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>لوحة التحدي الكبرى - النسخة الملونة والمخصصة</title>
+    <title>لعبة لوحة التحدي - 30 تصنيفاً كاملاً</title>
     <style>
         * {
             box-sizing: border-box;
@@ -13,7 +13,7 @@
         }
 
         body {
-            background: linear-gradient(135deg, #0f172a, #1e1b4b);
+            background: linear-gradient(135deg, #1e1b4b, #312e81, #0f172a);
             color: #fff;
             display: flex;
             justify-content: center;
@@ -24,7 +24,7 @@
 
         .game-container {
             width: 100%;
-            max-width: 1200px;
+            max-width: 1250px;
             height: 97vh;
             background: #f8fafc;
             color: #333;
@@ -33,7 +33,7 @@
             flex-direction: column;
             justify-content: space-between;
             padding: 20px;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            box-shadow: 0 25px 60px rgba(0,0,0,0.6);
         }
 
         /* شاشة اختيار الفئات */
@@ -46,25 +46,25 @@
 
         .selection-header {
             text-align: center;
-            margin-bottom: 10px;
+            margin-bottom: 5px;
         }
-        .selection-header h2 { color: #1e1b4b; font-size: 2rem; margin-bottom: 5px; }
-        .selection-header p { color: #64748b; font-size: 1.1rem; }
+        .selection-header h2 { color: #312e81; font-size: 1.9rem; margin-bottom: 3px; }
+        .selection-header p { color: #64748b; font-size: 1.05rem; font-weight: bold; }
 
         .categories-picker-grid {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 12px;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 10px;
             overflow-y: auto;
             flex-grow: 1;
-            padding: 10px;
+            padding: 5px;
         }
 
         .picker-card {
             background: #ffffff;
             border: 3px solid #e2e8f0;
-            border-radius: 14px;
-            padding: 12px;
+            border-radius: 12px;
+            padding: 10px;
             text-align: center;
             cursor: pointer;
             transition: all 0.25s ease;
@@ -72,44 +72,44 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            min-height: 95px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.04);
+            min-height: 85px;
+            box-shadow: 0 3px 5px rgba(0,0,0,0.03);
         }
 
         .picker-card:hover {
             border-color: #6366f1;
-            transform: translateY(-3px);
-            box-shadow: 0 8px 15px rgba(99, 102, 241, 0.15);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(99, 102, 241, 0.2);
         }
 
         .picker-card.selected {
             background: linear-gradient(135deg, #e0e7ff, #ede9fe);
-            border-color: #6366f1;
-            color: #4338ca;
+            border-color: #4f46e5;
+            color: #312e81;
             font-weight: bold;
-            box-shadow: 0 6px 15px rgba(99, 102, 241, 0.3);
+            box-shadow: 0 5px 15px rgba(79, 70, 229, 0.3);
         }
 
-        .picker-card h4 { font-size: 1.15rem; margin-bottom: 3px; color: #1e1b4b; }
-        .picker-card span { font-size: 0.8rem; color: #64748b; }
+        .picker-card h4 { font-size: 1rem; margin-bottom: 2px; color: #1e1b4b; }
+        .picker-card span { font-size: 0.75rem; color: #64748b; }
 
         .start-game-btn {
-            background: linear-gradient(135deg, #4f46e5, #6366f1);
+            background: linear-gradient(135deg, #4f46e5, #9333ea);
             color: white;
             border: none;
-            padding: 15px;
-            border-radius: 12px;
+            padding: 14px;
+            border-radius: 14px;
             font-size: 1.25rem;
             cursor: pointer;
             font-weight: bold;
             transition: 0.3s;
-            margin-top: 15px;
+            margin-top: 10px;
             box-shadow: 0 6px 20px rgba(79, 70, 229, 0.4);
         }
 
         .start-game-btn:hover:not(:disabled) {
             transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(79, 70, 229, 0.6);
+            box-shadow: 0 8px 25px rgba(147, 51, 234, 0.5);
         }
 
         .start-game-btn:disabled {
@@ -129,12 +129,12 @@
         .game-header {
             display: flex;
             justify-content: space-between;
-            background: linear-gradient(135deg, #1e1b4b, #312e81);
+            background: linear-gradient(135deg, #1e1b4b, #4f46e5);
             padding: 12px 20px;
-            border-radius: 12px;
+            border-radius: 14px;
             color: white;
             align-items: center;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
         }
 
         .game-header h1 { font-size: 1.3rem; }
@@ -169,7 +169,7 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            font-size: 1.3rem;
+            font-size: 1.35rem;
             font-weight: bold;
             color: #1e1b4b;
             box-shadow: 0 4px 8px rgba(0,0,0,0.06);
@@ -193,7 +193,7 @@
 
         .tile:hover {
             background: linear-gradient(135deg, #e0e7ff, #c7d2fe);
-            border-color: #6366f1;
+            border-color: #4f46e5;
             transform: translateY(-3px);
             color: #312e81;
         }
@@ -209,14 +209,14 @@
 
         .tile.disabled span.cat-label { color: #94a3b8; }
 
-        /* شريط النقاط والأسماء القابلة للتعديل */
+        /* شريط النقاط والأسماء */
         .players-footer {
             display: flex;
             justify-content: space-between;
             align-items: center;
             background: #fff;
-            padding: 12px 20px;
-            border-radius: 14px;
+            padding: 14px 20px;
+            border-radius: 16px;
             box-shadow: 0 -4px 20px rgba(0,0,0,0.06);
         }
 
@@ -225,8 +225,8 @@
             align-items: center;
             gap: 12px;
             background: #f1f5f9;
-            padding: 10px 20px;
-            border-radius: 35px;
+            padding: 10px 22px;
+            border-radius: 40px;
             font-weight: bold;
             font-size: 1.1rem;
             border: 2px solid #e2e8f0;
@@ -245,10 +245,10 @@
         }
 
         .score-btn {
-            background: rgba(0,0,0,0.12);
+            background: rgba(0,0,0,0.15);
             border: none;
-            width: 34px;
-            height: 34px;
+            width: 36px;
+            height: 36px;
             border-radius: 50%;
             font-size: 1.3rem;
             cursor: pointer;
@@ -259,24 +259,23 @@
             transition: 0.2s;
         }
 
-        .score-btn:hover { background: rgba(0,0,0,0.25); }
+        .score-btn:hover { background: rgba(0,0,0,0.3); }
 
         .editable-name {
             background: transparent;
             border: none;
-            border-bottom: 2px dashed rgba(255,255,255,0.6);
+            border-bottom: 2px dashed rgba(255,255,255,0.7);
             color: inherit;
-            font-size: 1.1rem;
+            font-size: 1.15rem;
             font-weight: bold;
             text-align: center;
-            width: 100px;
+            width: 110px;
             outline: none;
             padding: 2px;
         }
 
         .center-logo h2 {
-            color: #1e1b4b;
-            font-size: 1.4rem;
+            font-size: 1.5rem;
             background: linear-gradient(135deg, #4f46e5, #9333ea);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -287,7 +286,7 @@
             display: none;
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(15, 23, 42, 0.8);
+            background: rgba(15, 23, 42, 0.85);
             justify-content: center;
             align-items: center;
             z-index: 1000;
@@ -299,10 +298,10 @@
             padding: 30px;
             border-radius: 20px;
             width: 100%;
-            max-width: 550px;
+            max-width: 580px;
             text-align: center;
             color: #333;
-            box-shadow: 0 25px 50px rgba(0,0,0,0.4);
+            box-shadow: 0 25px 60px rgba(0,0,0,0.5);
             animation: modalPop 0.3s ease;
         }
 
@@ -311,21 +310,13 @@
             100% { transform: scale(1); opacity: 1; }
         }
 
-        .modal-content h3 { color: #4f46e5; font-size: 1.15rem; margin-bottom: 10px; }
-        .modal-content p { font-size: 1.3rem; margin: 15px 0; line-height: 1.6; color: #1e1b4b; font-weight: 500; }
+        .modal-content h3 { color: #4f46e5; font-size: 1.2rem; margin-bottom: 10px; }
+        .modal-content p { font-size: 1.35rem; margin: 15px 0; line-height: 1.6; color: #1e1b4b; font-weight: 600; }
         
-        .modal-image {
-            max-width: 100%;
-            max-height: 200px;
-            border-radius: 10px;
-            margin: 10px 0;
-            object-fit: contain;
-        }
-
         #modalAnswerText {
             background: #f8fafc;
-            padding: 14px;
-            border-radius: 10px;
+            padding: 15px;
+            border-radius: 12px;
             border: 2px dashed #cbd5e1;
             color: #16a34a;
             font-weight: bold;
@@ -357,21 +348,19 @@
 
     <div class="game-container">
         
-        <!-- شاشة اختيار الفئات -->
+        <!-- شاشة اختيار الفئات (30 تصنيفاً) -->
         <div id="selectionScreen">
             <div class="selection-header">
-                <h2>✨ اختر 6 فئات لتلعب بها الآن</h2>
+                <h2>🎮 اختر 6 فئات من بين 30 تصنيفاً لنبدأ التحدي</h2>
                 <p id="counterText">تم اختيار (0 / 6) فئات</p>
             </div>
             
-            <div class="categories-picker-grid" id="pickerGrid">
-                <!-- يتم توليد البطاقات ديناميكياً -->
-            </div>
+            <div class="categories-picker-grid" id="pickerGrid"></div>
 
-            <button class="start-game-btn" id="startBtn" disabled onclick="startGame()">ابدأ التحدي الملون والممتع!</button>
+            <button class="start-game-btn" id="startBtn" disabled onclick="startGame()">ابدأ لعبة التحدي الكبرى الآن! 🚀</button>
         </div>
 
-        <!-- شاشة اللعبة الفعالة -->
+        <!-- شاشة اللعبة الفعلية -->
         <div id="gameScreen">
             <header class="game-header">
                 <button onclick="location.reload()">🔄 تغيير الفئات</button>
@@ -379,9 +368,7 @@
                 <button onclick="alert('انقر على اسم أي لاعب لتغييره، اختر المربع، اطرح السؤال، ثم انقر لإظهار الإجابة!')">💡 تعليمات اللعب</button>
             </header>
 
-            <main class="board-grid" id="boardGrid">
-                <!-- شبكة الأسئلة والنقاط -->
-            </main>
+            <main class="board-grid" id="boardGrid"></main>
 
             <footer class="players-footer">
                 <div class="player-box blue-theme">
@@ -411,139 +398,273 @@
         <div class="modal-content">
             <h3 id="modalCategory">اسم الفئة</h3>
             <p id="modalQuestionText">نص السؤال سيظهر هنا...</p>
-            <div id="modalImageContainer"></div>
             <div id="modalAnswerText" onclick="revealAnswer()">[اضغط هنا لعرض الإجابة الصحيحة]</div>
             <button class="modal-close-btn" onclick="closeModal()">إغلاق وتسجيل النقاط ✓</button>
         </div>
     </div>
 
     <script>
-        // بنك الأسئلة الشامل والمحدث بالكامل بناءً على طلبك
+        // بنك الأسئلة المكون من 30 تصنيفاً متكاملاً
         const allCategories = [
-            {
-                id: 1, name: "القرآن الكريم", icon: "📖",
-                questions: [
-                    { points: 200, q: "ما هي السورة التي تُسمى بـ 'قلب القرآن'؟", a: "سورة يس" },
-                    { points: 200, q: "كم عدد سور القرآن الكريم؟", a: "114 سورة" },
-                    { points: 400, q: "ما هي السورة التي تبدأ بدون بسملة؟", a: "سورة التوبة" },
-                    { points: 400, q: "ما هي أطول سورة في القرآن الكريم؟", a: "سورة البقرة" },
-                    { points: 600, q: "سورة قرآنية ذُكر فيها اسم 'بسملة' أو البسملة مرتين؟", a: "سورة النمل (في آية الملك سليمان وفي بدايتها)" },
-                    { points: 600, q: "ما هي السورة التي تُقارب ربع القرآن وتُعدل ثلثه؟", a: "سورة الإخلاص (تعادل ثلث القرآن)" }
-                ]
-            },
-            {
-                id: 2, name: "السيرة النبوية", icon: "🕌",
-                questions: [
-                    { points: 200, q: "في أي مدينة وُلد النبي محمد صلى الله عليه وسلم؟", a: "مكة المكرمة" },
-                    { points: 200, q: "ما اسم ناقة الرسول صلى الله عليه وسلم التي هاجر عليها؟", a: "القصواء" },
-                    { points: 400, q: "ما هي الغزوة التي وقعت في العام الثالث للهجرة وحدثت فيها جراح المسلمين؟", a: "غزوة أحد" },
-                    { points: 400, q: "من هو الصحابي الجليل الذي لُقب بـ 'سيف الله المسلول'؟", a: "خالد بن الوليد" },
-                    { points: 600, q: "ما اسم العام الذي توفيت فيه خديجة بنت خويلد وعم النبي أبو طالب ويُسمى بحزن؟", a: "عام الحزن" },
-                    { points: 600, q: "من هو أول سفير في الإسلام أرسله النبي إلى المدينة لتعليم أهلها؟", a: "مصعب بن عمير" }
-                ]
-            },
-            {
-                id: 3, name: "مسلسلات خليجية", icon: "📺",
-                questions: [
-                    { points: 200, q: "مسلسل تراثي خليجي شهير بطولة الفنان عبد الحسين عبد الرضا وخالد النفيسي؟", a: "درب الزلق" },
-                    { points: 200, q: "ما اسم المسلسل الرمضاني الكوميدي الشهير المكون من أجزاء كثيرة للفنان طاش ما طاش؟", a: "طاش ما طاش (ناصر القصبي وعبد الله السدحان)" },
-                    { points: 400, q: "مسلسل كويتي درامي اجتماعي شهير ناقش قضايا الأسرة والمجتمع بطولة سعاد عبد الله وحياة الفهد؟", a: "الرقص على جراح النطاح أو خالتي قماشة" },
-                    { points: 400, q: "ما اسم المسلسل الخليجي التراثي الشهير الذي يحكي قصص شعبية قديمة 'أم الساجي أو فرجان ليل'؟", a: "فرجان ليل / أو حكايات شعبية" },
-                    { points: 600, q: "مسلسل كويتي كوميدي تراثي عُرض في الثمانينات ويُعتبر علامة فارقة للفنان عبد الحسين عبد الرضا؟", a: "أبرق العبد أو محطة حكايات / درب الزلق" },
-                    { points: 600, q: "مسلسل درامي خليجي حديث حقق شهرة واسعة حول قضايا الجريمة والتحقيق مثل 'المنتصف' أو 'أم هارون'؟", a: "أم هارون" }
-                ]
-            },
-            {
-                id: 4, name: "أفلام أجنبية", icon: "🎬",
-                questions: [
-                    { points: 200, q: "ما اسم سلسلة أفلام الخيال الساحرة الشهيرة التي تدور أحداثها في مدرسة هوجوورتس؟", a: "هاري بوتر (Harry Potter)" },
-                    { points: 200, q: "سلسلة أفلام أبطال خارقين من مارفل تضم أبطالاً مثل آيرون مان وثور وكابتن أمريكا؟", a: "المنتقمون (Avengers)" },
-                    { points: 400, q: "ما اسم فيلم الخيال العلمي الشهير للمخرج كريستوفر نولان الذي يتحدث عن الأحلام داخل الأحلام؟", a: "إنسبشن (Inception)" },
-                    { points: 400, q: "سلسلة أفلام سباق سيارات شهيرة جداً بطولة الراحل بول ووكر وفين ديزل؟", a: "فاست آند فيوريوس (Fast & Furious)" },
-                    { points: 600, q: "فيلم دراما وسجون شهير يُصنف دائماً كالأفضل في تاريخ السينما العالمية (الهروب من شاوشانك)؟", a: "The Shawshank Redemption" },
-                    { points: 600, q: "سلسلة أفلام خيال علمي وفضاء شهيرة جداً تبدأ بعبارة 'في يوم من الأيام في غالاكسي بعيدة جداً'؟", a: "حرب النجوم (Star Wars)" }
-                ]
-            },
-            {
-                id: 5, name: "كأس العالم", icon: "⚽",
-                questions: [
-                    { points: 200, q: "ما هو المنتخب الأكثر تتويجاً ببطولة كأس العالم في تاريخ كرة القدم؟", a: "البرازيل (5 مرات)" },
-                    { points: 200, q: "في أي دولة أُقيمت بطولة كأس العالم لكرة القدم عام 2022؟", a: "دولة قطر" },
-                    { points: 400, q: "من هو اللاعب الأرجنتيني الذي قاد منتخبه للفوز بمونديال 2022؟", a: "ليونيل ميسي" },
-                    { points: 400, q: "ما هو المنتخب العربي الذي حقق إنجازاً تاريخياً بالتأهل لنصف نهائي كأس العالم 2022؟", a: "المنتخب المغربي" },
-                    { points: 600, q: "من هو الهداف التاريخي لبطولة كأس العالم عبر كل العصور؟", a: "ميروسلاف كلوزه (ألمانيا)" },
-                    { points: 600, q: "ما اسم الدولة التي استضافت أول بطولة كأس العالم في التاريخ عام 1930؟", a: "أوروغواي" }
-                ]
-            },
-            {
-                id: 6, name: "رتب الكلمة", icon: "🔠",
-                questions: [
-                    { points: 200, q: "رتب حروف هذه الكلمة لتصبح حيواناً مفترساً: (د - أ - س - إ)", a: "أسد" },
-                    { points: 200, q: "رتب الحروف التالية لتكون عاصمة عربية: (ر - ا - ق - ه)", a: "القاهرة" },
-                    { points: 400, q: "رتب الحروف لتستخرج فاكهة صيفية لذيذة: (ب - خ - ر - ت - ي)", a: "بطيخ" },
-                    { points: 400, q: "رتب الحروف لتكون جماداً نكتب به: (ق - ل - م)", a: "قلم" },
-                    { points: 600, q: "رتب حروف كلمة (ر - م - ق - ت - ي) لتصبح اسم دولة عربية؟", a: "قطر / أو موريشيوس / أو بيروت" },
-                    { points: 600, q: "رتب أحرف الكلمة التالية لتشكل عنصراً كيميائياً ثميناً: (ب - ذ - ه)", a: "ذهب" }
-                ]
-            },
-            {
-                id: 7, name: "طعام عربي", icon: "🍲",
-                questions: [
-                    { points: 200, q: "أكلة تقليدية خليجية شهيرة تتكون من الأرز واللحم أو الدجاج والبهارات الخاصة وتُعتبر الطبق الرئيسي؟", a: "الكبسة" },
-                    { points: 200, q: "أكلة شامية شهيرة تُصنع من الحمص المهروس والطحينة وعصير الليمون وزيت الزيتون؟", a: "المتبل / الحمص بالشام (حمص بالطحينة)" },
-                    { points: 400, q: "طبق تقليدي مغاربي شهير يُصنع من حبيبات السميد الرقيقة ويُطبخ بالخضار واللحم؟", a: "الكسكسي" },
-                    { points: 400, q: "أكلة شعبية فلسطينية/أردنية تتكون من اللحم المطبوخ بالجميد المنقوع والخبز والمنسف؟", a: "المنسف" },
-                    { points: 600, q: "ما هي الأكلة التقليدية المصنوعة من التمر المسحوق والسمن المذاب والقرص الطحين وتؤكل في الشتاء؟", a: "العصيدة أو الحنيني / المرتعشة" },
-                    { points: 600, q: "طبق حلويات رمضاني شهير ومحبوب يُصنع من رقائق العجين الرقيقة والحشو بالقشطة أو الجبن والقطر؟", a: "قطايف / كنافة" }
-                ]
-            },
-            {
-                id: 8, name: "عواصم العالم", icon: "🌍",
-                questions: [
-                    { points: 200, q: "ما هي عاصمة دولة سلطنة عمان؟", a: "مسقط" },
-                    { points: 200, q: "ما هي عاصمة دولة أستراليا؟", a: "كانبيرا" },
-                    { points: 400, q: "ما هي عاصمة كندا؟", a: "أوتاوا" },
-                    { points: 400, q: "ما هي عاصمة اليابان؟", a: "طوكيو" },
-                    { points: 600, q: "ما هي عاصمة الأرجنتين؟", a: "بوينس آيرس" },
-                    { points: 600, q: "ما هي عاصمة النمسا؟", a: "فيينا" }
-                ]
-            },
-            {
-                id: 9, name: "باب الحارة", icon: "🏘️",
-                questions: [
-                    { points: 200, q: "ما هو لقب شخصية 'عصام' في باب الحارة؟", a: "عصام الحلاق" },
-                    { points: 200, q: "من هو زعيم حارة الضبع في الجزء الأول؟", a: "العقيد أبو شهاب" },
-                    { points: 400, q: "ما اسم الحارة المنافسة لحارة الضبع؟", a: "حارة أبو النار" },
-                    { points: 400, q: "شخصية عُرفت بجملة 'حيف يا زلمة'؟", a: "أبو شهاب" },
-                    { points: 600, q: "الصيدلي الذي دخل الحارة وتزوج مأمون بيض البقر لاحقاً؟", a: "العتريس" },
-                    { points: 600, q: "في أي جزء ظهر أبو جودت كرئيس مخفر؟", a: "الجزء الأول" }
-                ]
-            }
+            { id: 1, name: "كرة القدم", icon: "⚽", questions: [
+                {points:200, q:"المنتخب الأكثر تتويجاً بكأس العالم؟", a:"البرازيل"},
+                {points:200, q:"النادي الأكثر فوزاً بدوري الأبطال؟", a:"ريال مدريد"},
+                {points:400, q:"المنتخب العربي في نصف نهائي 2022؟", a:"المغرب"},
+                {points:400, q:"النادي الحاصل على السداسية مرتين؟", a:"بايرن ميونخ وبرشلونة"},
+                {points:600, q:"المنتخب الأكثر فوزاً بأمم إفريقيا؟", a:"مصر"},
+                {points:600, q:"الهداف التاريخي لدوري الأبطال؟", a:"كريستيانو رونالدو"}
+            ]},
+            { id: 2, name: "الدوري الإنجليزي", icon: "🏴󠁧󠁢󠁥󠁮󠁧󠁿", questions: [
+                {points:200, q:"النادي الأكثر تتويجاً بالبريميرليغ؟", a:"مانشستر يونايتد"},
+                {points:200, q:"لقب نادي أرسنال؟", a:"المدفعجية"},
+                {points:400, q:"الهدف التاريخي للدوري الإنجليزي؟", a:"آلان شيرر"},
+                {points:400, q: "معجزة ليستر سيتي في أي عام فازوا؟", a:"2016"},
+                {points:600, q:"ملعب نادي ليفربول الشهير؟", a:"أنفيلد"},
+                {points:600, q:"ملعب مانشستر سيتي؟", a:"ملعب الاتحاد"}
+            ]},
+            { id: 3, name: "الدوري الإسباني", icon: "🇪🇸", questions: [
+                {points:200, q:"النادي الأكثر تتويجاً بالليغا؟", a:"ريال مدريد"},
+                {points:200, q:"ملعب نادي برشلونة؟", a:"كامب نو"},
+                {points:400, q:"ما اسم لقاء القمة بين ريال وبرشلونة؟", a:"كلاسيكو الأرض"},
+                {points:400, q:"بطل الليغا 2021 خارج القطبين؟", a:"اتلتيكو مدريد"},
+                {points:600, q:"الهداف التاريخي لليغا؟", a:"ليونيل ميسي"},
+                {points:600, q:"ملعب ريال مدريد التاريخي؟", a:"سانتياغو برنابيو"}
+            ]},
+            { id: 4, name: "ألعاب الفيديو", icon: "🎮", questions: [
+                {points:200, q:"لعبة المكعبات والبناء الأشهر؟", a:"ماين كرافت"},
+                {points:200, q:"لعبة العالم المفتوح للسرقة والجريمة؟", a:"GTA"},
+                {points:400, q:"لعبة الباتل رويال لإيبك جيمز؟", a:"فورت نايت"},
+                {points:400, q:"لعبة كرة القدم الشهيرة من EA؟", a:"إي إيه سبورتس إف سي"},
+                {points:600, q:"شخصية السباك الأحمر من نينتندو؟", a:"ماريو"},
+                {points:600, q: "لعبة العالم المفتوح الصعبة والمذهلة؟", a:"إلدن رينغ"}
+            ]},
+            { id: 5, name: "مسلسلات أجنبية", icon: "🎬", questions: [
+                {points:200, q:"مسلسل الأصدقاء الستة في نيويورك؟", a:"فريندز"},
+                {points:200, q:"مدرس كيمياء يتحول لتجارة المخدرات؟", a:"Breaking Bad"},
+                {points:400, q:"مسلسل عصابات برمنغهام؟", a:"بيكي بلايندرز"},
+                {points:400, q:"مسلسل الفنتازيا وصراع العروش؟", a:"Game of Thrones"},
+                {points:600, q:"الهروب الذكي من السجن؟", a:"بريزون بريك"},
+                {points:600, q:"مسلسل الجزيرة والغامض؟", a:"من (From)"}
+            ]},
+            { id: 6, name: "الأنمي", icon: "🍥", questions: [
+                {points:200, q:"أنمي القراصنة للبحث عن الكنز؟", a:"ون بيس"},
+                {points:200, q:"أنمي النينجا والقرية؟", a:"ناروتو"},
+                {points:400, q:"الأنمي المرعب ضد العمالقة؟", a:"هجوم العمالقة"},
+                {points:400, q: "أنمي صائدو الشياطين؟", a:"ديمون سلاير"},
+                {points:600, q:"أنمي الجوجوتسو والقتال السحري؟", a:"جوجوتسو كايسن"},
+                {points:600, q:"أنمي الشينيغامي وإيتشيغو؟", a:"بليتش"}
+            ]},
+            { id: 7, name: "القرآن الكريم", icon: "📖", questions: [
+                {points:200, q:"سورة تُسمى قلب القرآن؟", a:"سورة يس"},
+                {points:200, q:"كم عدد سور القرآن الكريم؟", a:"114 سورة"},
+                {points:400, q:"سورة لا تبدأ بالبسملة؟", a:"سورة التوبة"},
+                {points:400, q:"أطول سورة في القرآن؟", a:"سورة البقرة"},
+                {points:600, q:"سورة تُعدل ثلث القرآن؟", a:"سورة الإخلاص"},
+                {points:600, q:"سورة ذُكر فيها البسملة مرتين؟", a:"سورة النمل"}
+            ]},
+            { id: 8, name: "السيرة النبوية", icon: "🕌", questions: [
+                {points:200, q:"أين وُلد النبي محمد صلى الله عليه وسلم؟", a:"مكة المكرمة"},
+                {points:200, q:"ما اسم ناقة الهجرة؟", a:"القصواء"},
+                {points:400, q:"غزوة حدثت في العام الثالث للهجرة؟", a: "غزوة أحد"},
+                {points:400, q:"الصحابي الملقب بسيف الله المسلول؟", a:"خالد بن الوليد"},
+                {points:600, q:"عام توفيت فيه خديجة وعم النبي؟", a:"عام الحزن"},
+                {points:600, q:"أول سفير في الإسلام؟", a:"مصعب بن عمير"}
+            ]},
+            { id: 9, name: "طعام عربي", icon: "🍲", questions: [
+                {points:200, q:"أكلة خليجية شهيرة بالأرز واللحم؟", a:"الكبسة"},
+                {points:200, q:"أكلة شامية من الحمص والطحينة؟", a:"حمص بالطحينة"},
+                {points:400, q: "طبق مغاربي بالسميد والخضار؟", a:"الكسكسي"},
+                {points:400, q:"أكلة أردنية باللحم والجميد؟", a:"المنسف"},
+                {points:600, q:"حلويات رمضانية محشية بالقشطة؟", a:"القطايف والكنافة"},
+                {points:600, q:"أكلة شتوية من التمر والسمن؟", a:"العصيدة أو الحنيني"}
+            ]},
+            { id: 10, name: "رتب الكلمة", icon: "🔠", questions: [
+                {points:200, q:"رتب (د - أ - س - إ) لحيوان مفترس؟", a:"أسد"},
+                {points:200, q:"رتب (ر - ا - ق - ه) لعاصمة عربية؟", a:"القاهرة"},
+                {points:400, q:"رتب (ب - خ - ر - ت - ي) لفاكهة؟", a:"بطيخ"},
+                {points:400, q:"رتب (ق - ل - م) لجماد؟", a:"قلم"},
+                {points:600, q:"رتب (ب - ذ - ه) لعنصر معدني ثمين؟", a:"ذهب"},
+                {points:600, q:"رتب (ر - م - ق - ت) لدولة خليجية؟", a:"قطر"}
+            ]},
+            { id: 11, name: "عواصم العالم", icon: "🌍", questions: [
+                {points:200, q:"عاصمة سلطنة عمان؟", a:"مسقط"},
+                {points:200, q:"عاصمة أستراليا؟", a:"كانبيرا"},
+                {points:400, q:"عاصمة كندا؟", a:"أوتاوا"},
+                {points:400, q:"عاصمة اليابان؟", a:"طوكيو"},
+                {points:600, q:"عاصمة الأرجنتين؟", a:"بوينس آيرس"},
+                {points:600, q:"عاصمة النمسا؟", a:"فيينا"}
+            ]},
+            { id: 12, name: "شعارات", icon: "🛡️", questions: [
+                {points:200, q:"شعار سيارات بـ 4 حلقات متداخلة؟", a:"أودي"},
+                {points:200, q:"شركة تقنية شعارها تفاحة مقضومة؟", a:"أبل"},
+                {points:400, q:"شعار سيارات حصان جامح أصفر؟", a:"فيراري"},
+                {points:400, q:"مطعم شعاره حرف M ذهبي؟", a:"ماكدونالدز"},
+                {points:600, q:"الشعار الموجود على علم لبنان؟", a:"شجرة الأرز"},
+                {points:600, q:"الشعار البصري لشركة نايكي؟", a:"علامة الصح المائل"}
+            ]},
+            { id: 13, name: "جماد وحيوان", icon: "🦁", questions: [
+                {points:200, q:"جماد بحرف الميم للإضاءة بالسقف؟", a:"مصباح"},
+                {points:200, q:"حيوان مائي ذكي وينقذ البشر؟", a:"الدلفين"},
+                {points:400, q:"جماد بحرف الحاء للوقاية من الشمس؟", a:"قبعة"},
+                {points:400, q:"حيوان سفينة الصحراء؟", a:"الجمل"},
+                {points:600, q:"جماد لقص القماش والورق؟", a:"مقص"},
+                {points:600, q:"الطائر الوحيد الذي يطير للخلف؟", a:"طائر الطنان"}
+            ]},
+            { id: 14, name: "شخصيات", icon: "👤", questions: [
+                {points:200, q:"صاحب نظرية النسبية؟", a:"أينشتاين"},
+                {points:200, q:"مخترع المصباح الكهربائي؟", a:"توماس إديسون"},
+                {points:400, q:"الرحالة صاحب تحفة النظار؟", a:"ابن بطوطة"},
+                {points:400, q:"قائد معركة عين جالوت؟", a:"سيف الدين قطز"},
+                {points:600, q:"أديب مصري حاز نوبل 1988؟", a:"نجيب محفوظ"},
+                {points:600, q:"الرسام الإيطالي للموناليزا؟", a:"ليوناردو دافنشي"}
+            ]},
+            { id: 15, name: "باب الحارة", icon: "🏘️", questions: [
+                {points:200, q:"لقب شخصية عصام؟", a:"عصام الحلاق"},
+                {points:200, q:"زعيم حارة الضبع بالجزء الأول؟", a:"أبو شهاب"},
+                {points:400, q:"الحارة المنافسة لحارة الضبع؟", a:"حارة أبو النار"},
+                {points:400, q:"قائل جملة حيف يا زلمة؟", a:"أبو شهاب"},
+                {points:600, q:"الصيدلي الذي تزوج مأمون بيض البقر؟", a:"العتريس"},
+                {points:600, q:"أي جزء ظهر أبو جودت كرئيس مخفر؟", a:"الجزء الأول"}
+            ]},
+            { id: 16, name: "مسلسلات شامية", icon: "🏮", questions: [
+                {points:200, q:"مسلسل حارة الشاغور وبسام كوسا؟", a:"ليالي الصالحية"},
+                {points:200, q: "شخصية المعترم أو المعلم عمر؟", a:"باسل خياط"},
+                {points:400, q:"مسلسل الخوالي لسلوم حداد؟", a:"الخوالي"},
+                {points:400, q:"مسلسل شامية عائلات أبو العز؟", a:"حارة القبة"},
+                {points:600, q:"المرجع الأساسي للدراما الشامية؟", a:"أيام شامية"},
+                {points:600, q:"زوجة أبو عصام الأولى؟", a:"سعاد"}
+            ]},
+            { id: 17, name: "كرتون زمان", icon: "🧸", questions: [
+                {points:200, q:"المخلوق الطائر المرافق لسندباد؟", a:"ياسمينة"},
+                {points:200, q:"فتاة جبال الألب الصغيرة؟", a:"هايدي"},
+                {points:400, q:"مدينة عدنان ولينا؟", a:"قلعة المصنع"},
+                {points:400, q:"الفريق المنافس لباسّام؟", a:"فريق المجد"},
+                {points:600, q:"المحقق الصغير المقلص؟", a:"كونان"},
+                {points:600, q:"الكلب المرافق لسالي؟", a:"سيزر"}
+            ]},
+            { id: 18, name: "رسوم حديثة", icon: "✨", questions: [
+                {points:200, q:"الأميرة ذات القوى الجليدية؟", a:"إلسا (Frozen)"},
+                {points:200, q:"السيارة الحمراء بطل كارتون Cars؟", a:"برق مكوين"},
+                {points:400, q:"المشاعر الخمسة داخل رأس رايلي؟", a:"Inside Out"},
+                {points:400, q: "السمكة خفيفة الذاكرة بنيمو؟", a:"دوري"},
+                {points:600, q:"عالم سحري لعائلة ماديراغي؟", a:"إنكانتو"},
+                {points:600, q:"أنمي صائد الشياطين تانجيرو؟", a:"ديمون سلاير"}
+            ]},
+            { id: 19, name: "التاريخ", icon: "📜", questions: [
+                {points:200, q:"عام غزوة بدر الكبرى؟", a:"السنة الثانية للهجرة"},
+                {points:200, q:"الدولة التي قادت الخلافة العثمانية؟", a:"تركيا / الدولة العثمانية"},
+                {points:400, q:"فاتح القسطنطينية 1453؟", a:"محمد الفاتح"},
+                {points:400, q: "عام انتهاء الحرب العالمية الثانية؟", a:"1945"},
+                {points:600, q:"معركة نهاوند ضد من؟", a:"الفرس (الساسانيون)"},
+                {points:600, q:"مؤسس الدولة الأموية بالشام؟", a:"معاوية بن أبي سفيان"}
+            ]},
+            { id: 20, name: "الرياضيات", icon: "🔢", questions: [
+                {points:200, q:"ناتج ضرب 7 × 8؟", a:"56"},
+                {points:200, q:"العدد الأولي الزوجي الوحيد؟", a:"2"},
+                {points:400, q:"مساحة مربع طول ضلعه 9؟", a:"81"},
+                {points:400, q: "مجموع زوايا المثلث الداخلية؟", a:"180 درجة"},
+                {points:600, q:"جذر 144 مضافاً إليه 10؟", a:"22"},
+                {points:600, q:"نظرية المثلث القائم؟", a:"فيثاغورس"}
+            ]},
+            { id: 21, name: "العلوم والفيزياء", icon: "🔬", questions: [
+                {points:200, q:"رمز عنصر الذهب بالكيمياء؟", a:"Au"},
+                {points:200, q:"الغز الأكثر وفرة بالجو؟", a:"النييتروجين"},
+                {points:400, q:"وحدة قياس القوة؟", a:"النيوتن"},
+                {points:400, q:"سرعة الضوء بالفراغ؟", a:"300 ألف كم/ث"},
+                {points:600, q:"الرقم الهيدروجيني للماء النقي؟", a:"7"},
+                {points:600, q:"العنصر الأساسي بالعضويات؟", a:"الكربون"}
+            ]},
+            { id: 22, name: "الجغرافيا", icon: "🗺️", questions: [
+                {points:200, q:"عاصمة أستراليا؟", a:"كانبيرا"},
+                {points:200, q:"أكبر بحر مغلق بالعالم؟", a:"بحر قزوين"},
+                {points:400, q:"دولة عاصمتها كيتو؟", a:"الإكوادور"},
+                {points:400, q:"أطول نهر بالعالم؟", a:"نهر النيل"},
+                {points:600, q:"مضيق يفصل إفريقيا عن أوروبا؟", a:"جبل طارق"},
+                {points:600, q:"أصغر دولة بالعالم مساحة؟", a:"الفاتيكان"}
+            ]},
+            { id: 23, name: "مسلسلات خليجية", icon: "📺", questions: [
+                {points:200, q:"مسلسل درب الزلق الكويتي؟", a:"عبد الحسين عبد الرضا"},
+                {points:200, q:"مسلسل طاش ما طاش السعودي؟", a:"ناصر القصبي وعبد الله السدحان"},
+                {points:400, q: "مسلسل خالتي قماشة؟", a:"حياة الفهد وسعاد عبد الله"},
+                {points:400, q:"مسلسل فرجان ليل التراثي؟", a:"مسلسل تراثي خليجي"},
+                {points:600, q:"مسلسل أم هارون الكويتي؟", a:"حياة الفهد"},
+                {points:600, q:"مسلسل العاصوف السعودي؟", a:"ناصر القصبي"}
+            ]},
+            { id: 24, name: "أفلام أجنبية", icon: "🎥", questions: [
+                {points:200, q:"سلسلة هاري بوتر وسحر هوجوورتس؟", a:"هاري بوتر"},
+                {points:200, q:"أبطال مارفل الخارقون Avengers؟", a:"المنتقمون"},
+                {points:400, q:"فيلم Inception ونولان والأحلام؟", a:"إنسبشن"},
+                {points:400, q:"سلسلة Fast & Furious للسيارات؟", a:"فاست آند فيوريوس"},
+                {points:600, q:"فيلم The Shawshank Redemption؟", a:"الهروب من شاوشانك"},
+                {points:600, q:"سلسلة Star Wars وفضاء؟", a:"حرب النجوم"}
+            ]},
+            { id: 25, name: "كأس العالم", icon: "🏆", questions: [
+                {points:200, q:"أكثر منتخب توج بمونديال القدم؟", a:"البرازيل"},
+                {points:200, q:"الدولة المستضيفة لمونديال 2022؟", a:"قطر"},
+                {points:400, q:"قائد الأرجنتين بمونديال 2022؟", a:"ليونيل ميسي"},
+                {points:400, q:"المنتخب العربي بنصف نهائي 2022؟", a:"المغرب"},
+                {points:600, q:"الهداف التاريخي لكأس العالم؟", a:"ميروسلاف كلوزه"},
+                {points:600, q:"مضيف أول كأس عالم 1930؟", a:"أوروغواي"}
+            ]},
+            { id: 26, name: "منوعات وثقافة", icon: "💡", questions: [
+                {points:200, q:"عدد عظام الإنسان البالغ؟", a:"206 عظمة"},
+                {points:200, q:"أسرع حيوان بري بالعالم؟", a:"الفهد (الشيتا)"},
+                {points:400, q:"الكوكب المعروف بالأحمر؟", a:"المريخ"},
+                {points:400, q:"عاصمة كندا؟", a:"أوتاوا"},
+                {points:600, q:"العنصر الأكثر وفراً بقشرة الأرض؟", a:"الأكسجين"},
+                {points:600, q:"عام هبوط الإنسان على القمر؟", a:"1969"}
+            ]},
+            { id: 27, name: "ألغاز ذكاء", icon: "🧩", questions: [
+                {points:200, q:"شيء يسير بلا رجلين ويدخل للأذنين؟", a:"الصوت"},
+                {points:200, q:"بيت ليس فيه باب ولا نافذة؟", a:"بيت الشعر"},
+                {points:400, q:"شاعر المعلقات الملقب بالملك الضليل؟", a:"امرؤ القيس"},
+                {points:400, q:"صوت الحصان يُسمى؟", a:"صهيل"},
+                {points:600, q:"بحر يفصل آسيا عن إفريقيا بلونه؟", a:"البحر الأحمر"},
+                {points:600, q:"معدن نفيس يُسمى الذهب الأبيض؟", a:"البلاتين"}
+            ]},
+            { id: 28, name: "تكنولوجيا", icon: "💻", questions: [
+                {points:200, q:"مؤسس شركة مايكروسوفت؟", a:"بيل غيتس"},
+                {points:200, q:"مؤسس شركة أبل؟", a:"ستيف جوبز"},
+                {points:400, q:"ما هو نظام التشغيل لهواتف أيفون؟", a:"iOS"},
+                {points:400, q:"موقع الفيديوهات الأشهر بالعالم؟", a:"يوتيوب"},
+                {points:600, q:"ماذا تعني اختصار كلمة Wi-Fi؟", a:"تفضيل لاسلكي (تجاوز الإشارة)"},
+                {points:600, q:"لغة برمجة أساسية للويب وتفاعله؟", a:"جافاسكريبت"}
+            ]},
+            { id: 29, name: "عطور عالمية", icon: "🌸", questions: [
+                {points:200, q:"مكون أساسي شهير في عطور الشرق الأوسط؟", a:"العود والمسك"},
+                {points:200, q:"مدينة فرنسية تُعتبر عاصمة العطور؟", a:"غراس (Grasse)"},
+                {points:400, q:"أشهر زهرة مستخدمة في العطور الكلاسيكية؟", a:"الياسمين والورد الجوري"},
+                {points:400, q:"ما هو الزيت العطري الثابت المستخدم بالقواعد؟", a:"العنبر"},
+                {points:600, q:"مادة عطرية غקالية جداً تُستخرج من الحيتان؟", a:"العنبر الخام (عنبر الحوت)"},
+                {points:600, q:"نوع عطور مركز جداً وقوي الثبات؟", a:"البرفان (Parfum)"}
+            ]},
+            { id: 30, name: "سيارات", icon: "🏎️", questions: [
+                {points:200, q:"الشركة المصنعة لسيارة كورولا وكامري؟", a:"تويوتا"},
+                {points:200, q:"سيارة فاخرة بريطانية شعارها حرف B طائر؟", a:"بنتلي"},
+                {points:400, q:"سيارة كهربائية شهيرة لإيلون ماسك؟", a:"تيسلا"},
+                {points:400, q:"سيارة دفع رباعي يابانية شهيرة بـ لاندكروزر؟", a:"تويوتا"},
+                {points:600, q:"شركة ألمانية فاخرة تشتهر بالفئة السابعة؟", a:"بي إم دبليو (BMW)"},
+                {points:600, q:"أسرع سيارة إنتاج تجاري بالعالم تاريخياً؟", a:"بوغاتي (Bugatti)"}
+            ]}
         ];
 
         let selectedCategoryIds = [];
 
-        // توليد بطاقات الاختيار في الشاشة الأولى
         const pickerGrid = document.getElementById('pickerGrid');
         allCategories.forEach(cat => {
             const card = document.createElement('div');
             card.classList.add('picker-card');
             card.innerHTML = `
-                <div style="font-size: 2rem; margin-bottom: 6px;">${cat.icon}</div>
+                <div style="font-size: 1.8rem; margin-bottom: 3px;">${cat.icon}</div>
                 <h4>${cat.name}</h4>
                 <span>6 أسئلة ممتعة</span>
             `;
-            
-            card.addEventListener('click', function() {
-                toggleCategorySelection(cat.id, card);
-            });
-            
+            card.addEventListener('click', () => toggleCategorySelection(cat.id, card));
             pickerGrid.appendChild(card);
         });
 
         function toggleCategorySelection(catId, cardElement) {
             const index = selectedCategoryIds.indexOf(catId);
-            
             if (index > -1) {
                 selectedCategoryIds.splice(index, 1);
                 cardElement.classList.remove('selected');
@@ -552,10 +673,9 @@
                     selectedCategoryIds.push(catId);
                     cardElement.classList.add('selected');
                 } else {
-                    alert('يمكنك اختيار 6 فئات فقط لكل جولة! قم بإلغاء إحداهن لاختيار غيرها.');
+                    alert('يمكنك اختيار 6 فئات فقط لكل جولة!');
                 }
             }
-            
             document.getElementById('counterText').innerText = `تم اختيار (${selectedCategoryIds.length} / 6) فئات`;
             document.getElementById('startBtn').disabled = selectedCategoryIds.length !== 6;
         }
@@ -568,29 +688,24 @@
 
         function startGame() {
             activeCategoriesData = allCategories.filter(cat => selectedCategoryIds.includes(cat.id));
-            
             document.getElementById('selectionScreen').style.display = 'none';
             document.getElementById('gameScreen').style.display = 'flex';
-            
             buildBoard();
         }
 
         function buildBoard() {
             const boardGrid = document.getElementById('boardGrid');
             boardGrid.innerHTML = '';
-            
             activeCategoriesData.forEach((cat, catIdx) => {
                 cat.questions.forEach((qObj, qIdx) => {
                     const tile = document.createElement('div');
                     tile.classList.add('tile');
                     tile.innerHTML = `<span>${qObj.points}</span><span class="cat-label">${cat.name}</span>`;
-                    
-                    tile.addEventListener('click', function() {
-                        if(!tile.classList.contains('disabled')) {
+                    tile.addEventListener('click', () => {
+                        if (!tile.classList.contains('disabled')) {
                             openQuestionModal(catIdx, qIdx, tile);
                         }
                     });
-                    
                     boardGrid.appendChild(tile);
                 });
             });
@@ -600,23 +715,12 @@
             currentCatIdx = catIdx;
             currentQIdx = qIdx;
             activeTileElement = tileElement;
-
             const category = activeCategoriesData[catIdx];
             const qData = category.questions[qIdx];
             currentAnswerText = qData.a;
 
             document.getElementById('modalCategory').innerText = `فئة: ${category.name} (${qData.points} نقطة)`;
             document.getElementById('modalQuestionText').innerText = qData.q;
-            
-            // إدارة الصور إن وجدت في السؤال
-            const imgContainer = document.getElementById('modalImageContainer');
-            imgContainer.innerHTML = "";
-            if (qData.img) {
-                const img = document.createElement('img');
-                img.src = qData.img;
-                img.classList.add('modal-image');
-                imgContainer.appendChild(img);
-            }
             
             const ansDiv = document.getElementById('modalAnswerText');
             ansDiv.innerText = "[اضغط هنا لعرض الإجابة الصحيحة]";
@@ -633,13 +737,12 @@
 
         function closeModal() {
             document.getElementById('questionModal').style.display = 'none';
-            if(activeTileElement) {
+            if (activeTileElement) {
                 activeTileElement.classList.add('disabled');
                 activeTileElement.innerHTML = `<span>✓</span><span class="cat-label">تم</span>`;
             }
         }
 
-        // نظام النقاط وتعديل الأسماء
         let scores = { player1: 400, player2: 400 };
 
         function adjustScore(player, amount) {
